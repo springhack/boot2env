@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+new = os.path.dirname(__file__)
+
+print ('Choose a option:')
+print ('  1. Create a Node.js project')
+print ('  2. Create a React.js component')
+
+ch = int(raw_input())
+if ch == 1:
+    print ('  ==> Input project name:')
+    ch = raw_input()
+    os.system('cp -rvf %s/%s %s' % (new, 'templates', ch))
+if ch == 2:
+    print ('  ==> Input component name:')
+    ch = raw_input()
+    os.system('cp -rvf %s/%s %s.jsx' % (new, 'templates/src/client/jsx/App.jsx', ch))
+    os.system('touch ../less/%s.less' % ch)
+    ss = ''
+    with open('%s.jsx' % ch, 'r') as f:
+        ss = f.read()
+        f.close()
+    with open('%s.jsx' % ch, 'w') as f:
+        f.write(ss.replace('App', ch))
+        f.close()
+

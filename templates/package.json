@@ -1,0 +1,47 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/main.js",
+  "scripts": {
+    "test": "echo \"No test specified\"",
+    "bs": "mkdir -p lib && babel src/server -d lib",
+    "bc": "webpack --progress",
+    "start": "node lib/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "dependencies": {
+    "babel-cli": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-plugin-transform-decorators-legacy": "latest",
+    "babel-plugin-transform-react-jsx": "latest",
+    "babel-polyfill": "latest",
+    "babel-preset-react": "latest",
+    "babel-preset-stage-1": "latest",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "css-loader": "latest",
+    "express": "latest",
+    "express-session": "^1.14.2",
+    "extract-text-webpack-plugin": "latest",
+    "html-webpack-plugin": "latest",
+    "less": "latest",
+    "less-loader": "latest",
+    "mobx": "latest",
+    "mobx-react": "latest",
+    "muicss": "latest",
+    "multer": "^1.2.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "style-loader": "latest",
+    "webpack": "latest"
+  }
+}
