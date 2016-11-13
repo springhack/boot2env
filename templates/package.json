@@ -14,7 +14,7 @@
   "license": "ISC",
   "babel": {
     "presets": [
-      "latest"
+      "stage-1"
     ]
   },
   "dependencies": {
