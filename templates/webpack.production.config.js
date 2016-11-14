@@ -1,24 +1,13 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var path = require('path');
 
 module.exports = {
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    contentBase: './',
-    port: 9090
-  },
   entry: {
-    main: ['webpack/hot/dev-server', 'webpack-dev-server/client?http://localhost:9090', path.resolve(__dirname, 'src/client/main.js')]
+    main: './src/client/main.js'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    path: 'dist',
     filename: './res/js/[name].js'
   },
   resolve: {
@@ -30,7 +19,11 @@ module.exports = {
       loader: 'babel-loader',
       exclude: function (path) {
         return (!!path.match(/node_modules/));
-      }
+      }/**,
+      query: {
+        presets: ['react','latest', 'stage-0'],
+        plugins: ['babel-plugin-transform-decorators-legacy']
+      }**/
     },
     {
       test: /\.css$/,
@@ -50,8 +43,19 @@ module.exports = {
 	    collapseWhitespace: false
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("./res/css/[name].css"),
-    new OpenBrowserPlugin({ url: 'http://localhost:9090' })
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false
+      },
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new ExtractTextPlugin("./res/css/[name].css")
   ]
 };

@@ -1,20 +1,27 @@
 {
-  "name": "client",
+  "name": "dosk-ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "A UI framework",
   "main": "./lib/main.js",
   "scripts": {
     "test": "echo \"No test specified\"",
+    "dev": "webpack-dev-server --devtool eval --progress --hot --colors --content-base build",
     "bs": "mkdir -p lib && babel src/server -d lib",
-    "bc": "webpack --progress",
+    "bc": "NODE_ENV=production webpack --progress --config webpack.production.config.js",
     "start": "node lib/main.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "SpringHack",
+  "license": "GPL-3.0",
   "babel": {
     "presets": [
-      "stage-1"
+      "react",
+      "latest",
+      "stage-0"
+    ],
+    "plugins": [
+      "babel-plugin-transform-decorators-legacy",
+      "react-hot-loader/babel"
     ]
   },
   "dependencies": {
@@ -24,8 +31,9 @@
     "babel-plugin-transform-decorators-legacy": "latest",
     "babel-plugin-transform-react-jsx": "latest",
     "babel-polyfill": "latest",
+    "babel-preset-latest": "latest",
     "babel-preset-react": "latest",
-    "babel-preset-stage-1": "latest",
+    "babel-preset-stage-0": "latest",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "css-loader": "latest",
@@ -39,9 +47,12 @@
     "mobx-react": "latest",
     "muicss": "latest",
     "multer": "^1.2.0",
+    "open-browser-webpack-plugin": "^0.0.3",
     "react": "latest",
     "react-dom": "latest",
+    "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "latest",
-    "webpack": "latest"
+    "webpack": "latest",
+    "webpack-dev-server": "^1.16.2"
   }
 }
