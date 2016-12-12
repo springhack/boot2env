@@ -19,11 +19,14 @@ module.exports = {
       loader: 'babel-loader',
       exclude: function (path) {
         return (!!path.match(/node_modules/));
-      }/**,
-      query: {
-        presets: ['react','latest', 'stage-0'],
-        plugins: ['babel-plugin-transform-decorators-legacy']
-      }**/
+      }
+    },
+    {
+      test: /\.tpl$/,
+      loader: 'single-react',
+      exclude: function (path) {
+        return (!!path.match(/node_modules/));
+      }
     },
     {
       test: /\.css$/,

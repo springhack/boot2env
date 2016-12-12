@@ -51,6 +51,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hot-loader": "^3.0.0-beta.6",
+    "single-react-loader": "^1.0.5",
     "style-loader": "latest",
     "webpack": "latest",
     "webpack-dev-server": "^1.16.2"

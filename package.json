@@ -1,0 +1,29 @@
+{
+  "name": "boot2env",
+  "version": "1.0.0",
+  "description": "A toolkit to help dev.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo SpringHack"
+  },
+  "bin": {
+    "coder": "index.js",
+    "bootvm": "tools/bootvm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/springhack/boot2env.git"
+  },
+  "keywords": [
+    "SpringHack"
+  ],
+  "author": "SpringHack",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/springhack/boot2env/issues"
+  },
+  "homepage": "https://github.com/springhack/boot2env#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
