@@ -33,13 +33,6 @@ module.exports = {
       }
     },
     {
-      test: /\.tpl$/,
-      loader: 'single-react',
-      exclude: function (path) {
-        return (!!path.match(/node_modules/));
-      }
-    },
-    {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract(['css'])
     },

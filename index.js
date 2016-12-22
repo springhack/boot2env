@@ -29,7 +29,7 @@ if (tool.type && tool.file)
         break;
         case 'component':
         case 'c':
-            AppPath = path.resolve(__dirname, 'templates/src/client/react/App.tpl');
+            AppPath = path.resolve(__dirname, 'templates/src/client/jsx/App.jsx');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;
