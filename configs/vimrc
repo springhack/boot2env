@@ -5,6 +5,7 @@ set cursorline
 set cindent
 set backspace=2
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set completeopt=menu
 set expandtab
