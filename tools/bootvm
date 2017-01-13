@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
+import random
 import socket
 import thread
 import time
 import sys
 import os
+import re
 
 
 HOST = '127.0.0.1'
 USER = 'springhack'
 PORT = 10022
-
+SSH_CONFIG = '~/.ssh/auto_login'
 
 BUFFSIZE = 1024
 ADDR = (HOST, PORT)
@@ -31,7 +33,8 @@ LOGO = '''
 [0m[1;33m   #####[0m[1;30m#######[0m[1;33m#####        [0m
 '''
 
-print LOGO
+def Logo():
+    print LOGO
 
 
 class ProgressBar:
@@ -106,13 +109,13 @@ def SSHCheck(bar):
         return False
 
 
-def main():
+def opt_vm():
     print 'List all environment: '
     list = getList()
     for i in range(len(list)):
         print '\t%d. %s' % (i + 1, list[i])
     ch = int(input('Choice a env: '))
-    if ch >= len(list):
+    if ch > len(list):
         print 'No such env, exit !'
         return
     vm = list[ch - 1]
@@ -123,14 +126,67 @@ def main():
         os.system('ssh %s@%s -p %d' % (USER, HOST, PORT))
         print 'Exiting ...'
         os.system('VBoxManage controlvm "%s" poweroff' % vm)
-        os.system('pkill VBox*')
         print 'We done !'
     else:
         print 'Unknown error, try again ?'
         os.system('VBoxManage controlvm "%s" poweroff' % vm)
-        os.system('pkill VBox*')
         print 'Exited !'
 
+
+def opt_ssh():
+    ssh = []
+    exp = re.compile(r'[\s]+')
+    if not os.path.exists((os.path.expanduser(SSH_CONFIG))):
+        print 'No config file found !'
+        sys.exit(-1)
+    with open(os.path.expanduser(SSH_CONFIG)) as f:
+        for line in f:
+            ssh.append(filter(lambda x:x!='', exp.split(line)))
+    print 'List all remote host: '
+    list = getList()
+    for i in range(len(ssh)):
+        print '\t%d. %s@%s' % (i + 1, ssh[i][1], ssh[i][0])
+    ch = int(input('Choice a host: '))
+    if ch > len(ssh):
+        print 'No such host, exit !'
+        return
+    host = ssh[ch - 1]
+    tmp = '/tmp/auto_login.%f' % random.random()
+    if host[3] == '*':
+        host[3] = '22'
+    with open(tmp, 'w') as f:
+        f.write('#!/usr/bin/expect\n')
+        if host[4] == '*':
+            f.write('spawn ssh %s@%s -p %s\n' % (host[1], host[0], host[3]))
+        else:
+            f.write('spawn ssh %s@%s -p %s -i %s\n' % (host[1], host[0], host[3], host[4]))
+        f.write(
+r'''
+expect {
+    "yes/no" { send "yes\r";exp_continue }
+    "password:" { send "%s\r" }
+}
+''' % host[2]
+            )
+        f.write('expect "*from*"\ninteract\n')
+    os.chmod(tmp, 0o755)
+    os.system(tmp)
+    os.remove(tmp)
+
+
+def main():
+    Logo()
+    print 'Boot option: '
+    print '\t1. Boot a local VM.'
+    print '\t2. Connect to a remote host.'
+    ch = int(input('Choose one: '))
+    if ch > 2:
+        print 'No such choice !'
+        sys.exit(-1)
+    if ch == 1:
+        opt_vm()
+    else:
+        opt_ssh()
 
 
 if __name__ == '__main__':
