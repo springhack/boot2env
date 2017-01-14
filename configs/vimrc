@@ -1,156 +1,182 @@
-set nocompatible
+" Vim Config Here
 set nu
-set noswapfile
-set cursorline
-set cindent
-set backspace=2
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set completeopt=menu
-set expandtab
 set ai
-
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=1
-let Tlist_Auto_Open=0
-let g:winManagerWindowLayout='FileExplorer|TagList'
-let g:winManagerWidth=30
-
+set ts=4
+set sts=4
+set sw=4
+set bs=2
+set et
+set nocompatible
 syntax on
 
+
+" Vim UI Config
+"" These lines setup the environment to show graphics and colors correctly.
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+set t_Co=256
+let g:minBufExplForceSyntaxEnable = 1
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+if ! has('gui_running')
+   set ttimeoutlen=10
+   augroup FastEscape
+      autocmd!
+      au InsertEnter * set timeoutlen=0
+      au InsertLeave * set timeoutlen=1000
+   augroup END
+endif
+set laststatus=2 " Always display the statusline in all windows
+set guifont=Inconsolata\ for\ Powerline:h14
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline
+
+
+" Plugin Config Here
+"" othree/html5.vim
+let g:html5_event_handler_attributes_complete = 1
+let g:html5_rdfa_attributes_complete = 1
+let g:html5_microdata_attributes_complete = 1
+let g:html5_aria_attributes_complete = 1
+
+
+" Plugin Manager Here
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'othree/html5.vim'
+    Plugin 'gorodinskiy/vim-coloresque.git'
+    Plugin 'othree/yajs.vim'
+    Plugin 'othree/es.next.syntax.vim'
+call vundle#end()
+filetype plugin indent on
+
+
+" AutoCMD Config
 autocmd BufNewFile,BufRead * exec ":call AddTitle()"
 
 
+" User Define Functions And Shortcuts
+func! AddTitleA()
+    if getline(1) != "/**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
+        if getline(1) != ""
+            call append(0,"/**")
+        else
+            call setline(1,"/**")
+        endif
+        call append(1,"        Author: SpringHack - springhack@live.cn")
+        call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(3,"        Filename: ".expand("%"))
+        call append(4,"        Description: Created by SpringHack using vim automatically.")
+        call append(5,"**/")
+    endif
+    call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(4,"        Filename: ".expand("%"))
+endfunc
+
+func! AddTitleB()
+    if getline(1) != "<!DOCTYPE html>"
+        call append(0,"<!DOCTYPE html>")
+    endif
+    if getline(2) != "<!--" && getline(3) != "        Author: SpringHack - springhack@live.cn"
+        call append(1,"<!--")
+        call append(2,"        Author: SpringHack - springhack@live.cn")
+        call append(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(4,"        Filename: ".expand("%"))
+        call append(5,"        Description: Created by SpringHack using vim automatically.")
+        call append(6,"-->")
+    endif
+    if getline(8) != "<html>"
+        call append(7,"<html>")
+        call append(8,"    <head>")
+        call append(9,"        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
+        call append(10,"        <title>Index</title>")
+        call append(11,"    </head>")
+        call append(12,"    <body>")
+        call append(13,"    </body>")
+        call append(14,"</html>")
+    endif
+    call setline(4,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(5,"        Filename: ".expand("%"))
+endfunc
+
+func! AddTitleC()
+    if getline(1) != "<?php /**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
+        if getline(1) != ""
+            call append(0,"<?php /**")
+        else
+            call setline(1,"<?php /**")
+        endif
+        call append(1,"        Author: SpringHack - springhack@live.cn")
+        call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(3,"        Filename: ".expand("%"))
+        call append(4,"        Description: Created by SpringHack using vim automatically.")
+        call append(5,"**/ ?>")
+    endif
+    call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(4,"        Filename: ".expand("%"))
+endfunc
+
+func! AddTitle()
+    let setA = ["h","c","cpp","js","css","java","javascript"]
+    let setB = ["htm","html"]
+    for i in range(1,len(setA))
+        if &filetype == get(setA,i-1)
+            call AddTitleA()
+        endif
+    endfor
+    for i in range(1,len(setB))
+        if &filetype == get(setB,i-1)
+            call AddTitleB()
+        endif
+    endfor
+    if &filetype == "php"
+        call AddTitleC()
+    endif
+endfunc
+
+func! CompileCode()
+    w
+    if &filetype == "cpp"
+        call CompileGpp()
+    elseif &filetype == "c"
+        call CompileGcc()
+    endif
+endfunc
 
 func! CompileGcc()
-    w
     !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -g % -o %<
 endfunc
 
-
 func! CompileGpp()
-    w
     !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -g % -o %<
 endfunc
 
-
 func! RunResultOfGNU()
-    !clear && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<
+    if &filetype == "c" || &filetype == "cpp"
+        !clear && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<
+    endif
 endfunc
-
 
 func! RunPython()
     !clear && python %
 endfunc
 
-
-func! CompileJava()
-    !clear && javac %
-endfunc
-
-
-func! CompileCode()
-        w
-        if &filetype == "cpp"
-                call CompileGpp()
-        elseif &filetype == "c"
-                call CompileGcc()
-        elseif &filetype == "python"
-                call RunPython()
-        elseif &filetype == "java"
-                call CompileJava()
-        endif
+func! RunNodejs()
+    !clear && node %
 endfunc
 
 func! BuildAll()
-        w
-        if &filetype == "cpp"
-                exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
-        elseif &filetype == "c"
-                exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
-        endif
-endfunc
-
-
-func! AddTitleA()
-	if getline(1) != "/**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
-		if getline(1) != ""
-			call append(0,"/**")
-		else
-			call setline(1,"/**")
-		endif
-		call append(1,"        Author: SpringHack - springhack@live.cn")
-		call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-		call append(3,"        Filename: ".expand("%"))
-		call append(4,"        Description: Created by SpringHack using vim automatically.")
-		call append(5,"**/")
-	endif
-	call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-	call setline(4,"        Filename: ".expand("%"))
-endfunc
-
-func! AddTitleB()
-	if getline(1) != "<!--" && getline(2) != "        Author: SpringHack - springhack@live.cn"
-		if getline(1) != ""
-			call append(0,"<!--")
-		else
-			call setline(1,"<!--")
-		endif
-		call append(1,"        Author: SpringHack - springhack@live.cn")
-		call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-		call append(3,"        Filename: ".expand("%"))
-		call append(4,"        Description: Created by SpringHack using vim automatically.")
-		call append(5,"-->")
-		call append(6,"<!DOCTYPE html>")
-		call append(7,"<html>")
-		call append(8,"	<head>")
-		call append(9,"		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />")
-		call append(10,"		<title>Index</title>")
-		call append(11,"	</head>")
-		call append(12,"	<body>")
-		call append(13,"	</body>")
-		call append(14,"</html>")
-	endif
-	call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-	call setline(4,"        Filename: ".expand("%"))
-endfunc
-
-func! AddTitleC()
-	if getline(1) != "<?php /**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
-		if getline(1) != ""
-			call append(0,"<?php /**")
-		else
-			call setline(1,"<?php /**")
-		endif
-		call append(1,"        Author: SpringHack - springhack@live.cn")
-		call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-		call append(3,"        Filename: ".expand("%"))
-		call append(4,"        Description: Created by SpringHack using vim automatically.")
-		call append(5,"**/ ?>")
-	endif
-	call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-	call setline(4,"        Filename: ".expand("%"))
-endfunc
-
-func! AddTitle()
-	let setA = ["h","c","cpp","js","css","java"]
-	let setB = ["htm","html"]
-	for i in range(1,len(setA))
-		if &filetype == get(setA,i-1)
-			call AddTitleA()
-		endif
-	endfor
-	for i in range(1,len(setB))
-		if &filetype == get(setB,i-1)
-			call AddTitleB()
-		endif
-	endfor
-	if &filetype == "php"
-		call AddTitleC()
-	endif
-	w
+    w
+    if &filetype == "cpp"
+        exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
+    elseif &filetype == "c"
+        exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
+    elseif &filetype == "python"
+        call RunPython()
+    elseif &filetype == "javascript" || &filetype == "js"
+        call RunNodejs()
+    endif
 endfunc
 
 command A call BuildAll()
