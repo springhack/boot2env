@@ -12,6 +12,7 @@ tool
     .usage('[options]')
     .option('-t, --type <value>', 'What to create: project, component, vimrc, bashrc')
     .option('-f, --file <value>', 'File to cerate')
+    .option('-s, --ssr', 'SSR enable: default value is false')
     .parse(process.argv);
 
 console.log('Starting job ...');
@@ -23,13 +24,16 @@ if (tool.type && tool.file)
     {
         case 'project':
         case 'p':
-            AppPath = path.resolve(__dirname, 'templates');
+            if (tool.ssr)
+                AppPath = path.resolve(__dirname, 'react_server');
+            else
+                AppPath = path.resolve(__dirname, 'react_client');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;
         case 'component':
         case 'c':
-            AppPath = path.resolve(__dirname, 'templates/src/client/jsx/App.jsx');
+            AppPath = path.resolve(__dirname, 'react_server/src/common/components/App.js');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;

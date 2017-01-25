@@ -1,3 +1,9 @@
+/**
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2017-01-25 23:16:40
+        Filename: react_client/src/server/main.js
+        Description: Created by SpringHack using vim automatically.
+**/
 import 'babel-polyfill';
 
 import express from 'express';
