@@ -15,7 +15,7 @@
 > is config file for bootvm, only if it exists this command can be run. file format like this:
 
 ```
-hostname                username        password    22      AuthKeyFilePath
+hostname                username        password    port    AuthKeyFilePath
 115.159.152.88          ubuntu          *           22      ~/Documents/Keys/Alxw
 ```
 
