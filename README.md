@@ -12,13 +12,14 @@
 
 ###### ~/.ssh/auto_login
 
-> is config file for bootvm, only if it exists this command can be run. file format like this
+> is config file for bootvm, only if it exists this command can be run. file format like this:
 
 ```
-115.159.151.158         ubuntu          *           22      ~/Documents/Keys/Tencent
+hostname                username        password    22      AuthKeyFilePath
 115.159.152.88          ubuntu          *           22      ~/Documents/Keys/Alxw
 ```
 
+> this command try to connect via password default, place ```*``` to use AuthKeyFile
 
 ### coder: 
 
