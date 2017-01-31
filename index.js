@@ -1,3 +1,9 @@
+/**
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2017-02-01 02:32:41
+        Filename: index.js
+        Description: Created by SpringHack using vim automatically.
+**/
 #!/usr/bin/env node --harmony
 
 let fs = require('fs');

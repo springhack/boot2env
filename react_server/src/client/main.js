@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-01-25 11:06:48
-        Filename: src/client/main.js
+        Last modified: 2017-02-01 02:04:37
+        Filename: main.js
         Description: Created by SpringHack using vim automatically.
 **/
 import 'babel-polyfill';
@@ -10,7 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, browserHistory} from 'react-router';
 
-import Config from './config/Config.js';
+import Config from '../common/config/Config.js';
 import Model from './model/Model.js';
 import routes from '../common/routes.js';
 

@@ -1,0 +1,10 @@
+{
+  presets: [
+    'react',
+    'latest',
+    'stage-0'
+  ],
+  plugins: [
+    'babel-plugin-transform-decorators-legacy'
+  ]
+}
