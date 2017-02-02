@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-01 02:26:55
-        Filename: webpack.config.js
+        Last modified: 2017-02-02 21:05:41
+        Filename: react_server/webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -11,12 +11,12 @@ var path = require('path');
 
 module.exports = {
   entry: {
+    vendor: ['react', 'react-dom', 'react-router'],
     main: path.resolve(__dirname, 'src/client/main.js')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: './res/js/[name].js'
+    filename: 'res/js/[name].js'
   },
   module: {
     rules: [
@@ -48,7 +48,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/client/index.html',
+      template: path.resolve(__dirname, 'src/client/index.html'),
       inject: true,
       minify: {
         removeComments: true,
@@ -60,7 +60,11 @@ module.exports = {
         NODE_SSR: false
       }
     }),
-    new OpenBrowserPlugin({ url: 'http://localhost:9090' }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'res/js/vendor.js'
+    }),
+    new OpenBrowserPlugin({url: 'http://localhost:9090'}),
     new webpack.HotModuleReplacementPlugin()
   ],
   devtool : 'eval-source-map',
@@ -68,7 +72,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, 'dist'),
     port: 9090
   }
 };

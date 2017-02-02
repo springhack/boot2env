@@ -29,6 +29,7 @@
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.26.1",
+    "cssnano": "^3.10.0",
     "express": "^4.14.1",
     "express-session": "^1.15.0",
     "extract-text-webpack-plugin": "^2.0.0-beta",

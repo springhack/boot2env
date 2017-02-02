@@ -26,3 +26,7 @@ hostname                username        password    port    AuthKeyFilePath
 > A command to cerate project, react component or config files.
 
 > You can run ```coder -h``` to see help
+
+### Updates
+
+> Add loading 

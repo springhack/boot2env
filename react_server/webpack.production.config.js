@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-01 02:28:59
+        Last modified: 2017-02-02 21:09:53
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -13,12 +13,12 @@ var path = require('path');
 
 module.exports = {
   entry: {
+    vendor: ['react', 'react-dom', 'react-router'],
     main: path.resolve(__dirname, 'src/client/main.js')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: './res/js/[name].js'
+    filename: 'res/js/[name].js'
   },
   module: {
     rules: [
@@ -50,11 +50,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/client/index.html',
+      template: path.resolve(__dirname, 'src/client/index.html'),
       inject: true,
       minify: {
         removeComments: true,
-	    collapseWhitespace: false
+	    collapseWhitespace: true
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -70,6 +70,10 @@ module.exports = {
         NODE_ENV: '"production"',
         NODE_SSR: false
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'res/js/vendor.js'
     }),
     ExtractLESS,
     ExtractCSS
