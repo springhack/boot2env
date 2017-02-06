@@ -1,12 +1,11 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-06 20:30:38
+        Last modified: 2017-02-07 01:00:08
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
-let ExtractCSS = new ExtractTextPlugin('res/css/[name].css');
 let ExtractLESS = new ExtractTextPlugin('res/css/[name].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
@@ -32,11 +31,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: ExtractCSS.extract(['css-loader', 'postcss-loader'])
-      },
-      {
-        test: /\.less$/,
+        test: /\.(css|less)$/,
         use: ExtractLESS.extract(['css-loader', 'postcss-loader', {
           loader: 'less-loader',
           options: {
@@ -74,7 +69,6 @@ module.exports = {
       name: 'vendor',
       filename: 'res/js/vendor.js'
     }),
-    ExtractLESS,
-    ExtractCSS
+    ExtractLESS
   ]
 };
