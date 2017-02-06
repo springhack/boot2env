@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-07 00:59:06
+        Last modified: 2017-02-07 01:23:03
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -32,13 +32,21 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        use: ExtractLESS.extract(['css-loader', 'postcss-loader', {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true,
-            relativeUrls: false
+        use: ExtractLESS.extract([
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          'postcss-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              relativeUrls: false
+            }
           }
-        }])
+        ])
       }
     ]
   },

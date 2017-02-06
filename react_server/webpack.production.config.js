@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-07 01:00:08
-        Filename: webpack.production.config.js
+        Last modified: 2017-02-07 01:22:54
+        Filename: react_server/webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -32,13 +32,21 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        use: ExtractLESS.extract(['css-loader', 'postcss-loader', {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true,
-            relativeUrls: false
+        use: ExtractLESS.extract([
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          'postcss-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              relativeUrls: false
+            }
           }
-        }])
+        ])
       }
     ]
   },
