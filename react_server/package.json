@@ -9,7 +9,7 @@
     "bs": "BABEL_ENV=development mkdir -p lib && babel src/common -d lib && babel src/server -d lib",
     "bc": "BABEL_ENV=production NODE_ENV=production webpack --progress --config webpack.production.config.js",
     "build": "npm run bc && npm run bs",
-    "start": "node lib/main.js"
+    "start": "NODE_SSR=true node lib/main.js"
   },
   "keywords": [
     "React",
