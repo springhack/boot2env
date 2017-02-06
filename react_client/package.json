@@ -5,9 +5,9 @@
   "main": "./lib/main.js",
   "scripts": {
     "test": "npm run build",
-    "dev": "webpack-dev-server --progress",
-    "bs": "mkdir -p lib && babel src/server -d lib",
-    "bc": "NODE_ENV=production webpack --progress --config webpack.production.config.js",
+    "dev": "BABEL_ENV=development webpack-dev-server --progress",
+    "bs": "BABEL_ENV=development mkdir -p lib && babel src/server -d lib",
+    "bc": "BABEL_ENV=production NODE_ENV=production webpack --progress --config webpack.production.config.js",
     "build": "npm run bc && npm run bs",
     "start": "node lib/main.js"
   },

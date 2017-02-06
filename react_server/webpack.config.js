@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-02 21:05:41
-        Filename: react_server/webpack.config.js
+        Last modified: 2017-02-06 20:30:45
+        Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -65,7 +65,8 @@ module.exports = {
       filename: 'res/js/vendor.js'
     }),
     new OpenBrowserPlugin({url: 'http://localhost:9090'}),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
   devtool : 'eval-source-map',
   devServer: {

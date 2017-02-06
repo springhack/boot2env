@@ -1,10 +1,29 @@
 {
-  presets: [
-    'react',
-    'latest',
-    'stage-0'
-  ],
-  plugins: [
-    'babel-plugin-transform-decorators-legacy'
-  ]
+  'env': {
+    'production': {
+      presets: [
+        ['latest', {
+          'es2015': {
+            'modules': false
+          }
+        }],
+        'stage-0',
+        'react'
+      ],
+      plugins: [
+        'babel-plugin-transform-decorators-legacy'
+      ]
+    },
+    'development': {
+      presets: [
+        'latest',
+        'stage-0',
+        'react'
+      ],
+      plugins: [
+        'babel-plugin-transform-decorators-legacy'
+      ]
+    }
+  }
 }
+    

@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-02 19:38:31
-        Filename: src/client/main.js
+        Last modified: 2017-02-06 20:28:01
+        Filename: main.js
         Description: Created by SpringHack using vim automatically.
 **/
 import 'babel-polyfill';

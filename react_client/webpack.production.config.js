@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-02 21:03:11
-        Filename: ../react_client/webpack.production.config.js
+        Last modified: 2017-02-06 20:29:53
+        Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -25,7 +25,6 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         use: [
-          'react-hot-loader',
           'babel-loader'
         ],
         exclude: [
