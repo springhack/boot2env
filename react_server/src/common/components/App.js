@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-01 02:17:14
+        Last modified: 2017-02-08 16:07:08
         Filename: App.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -12,16 +12,12 @@ export default @observer class extends React.Component {
         super(props);
         this.state = {};
     }
-    render() 
-    {
+    render() {
         return (
-            <div>React SSR Component</div>
+            <div>React Component</div>
         );
     }
     componentDidMount() {
-        if (process.env.NODE_SSR)
-            console.log('Server'); //Won't happend
-        else
-            console.log('Client');
+        console.log('SpringHack');
     }
 }
