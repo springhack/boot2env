@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-06 20:48:07
+        Last modified: 2017-02-13 00:26:24
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -32,16 +32,37 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              import: false,
+              sourceMap: true
+            }
+          },
+          'postcss-loader'
+        ]
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true,
-            relativeUrls: false
-          }
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              import: false
+            }
+          },
+          'postcss-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+              relativeUrls: false
+            }
         }]
       }
     ]

@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-07 01:23:03
+        Last modified: 2017-02-13 00:27:23
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -36,6 +36,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
+              url: false,
+              import: false,
               minimize: true
             }
           },

@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-07 01:22:54
-        Filename: react_server/webpack.production.config.js
+        Last modified: 2017-02-13 00:29:53
+        Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -36,6 +36,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
+              url: false,
+              import: false,
               minimize: true
             }
           },
