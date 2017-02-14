@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-01-25 23:12:53
-        Filename: src/server/main.js
+        Last modified: 2017-02-14 14:31:58
+        Filename: main.js
         Description: Created by SpringHack using vim automatically.
 **/
 import 'babel-polyfill';
@@ -55,4 +55,4 @@ app.post('/upload', upload.array(), (req, res, next) => {
     res.json(req.body);
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

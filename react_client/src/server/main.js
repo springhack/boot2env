@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-01 01:58:07
+        Last modified: 2017-02-14 14:31:28
         Filename: src/server/main.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -34,4 +34,4 @@ app.post('/upload', upload.array(), (req, res, next) => {
     res.json(req.body);
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
