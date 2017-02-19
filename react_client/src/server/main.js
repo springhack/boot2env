@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-14 14:31:28
+        Last modified: 2017-02-19 13:38:56
         Filename: src/server/main.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -8,6 +8,7 @@ import 'babel-polyfill';
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import session from 'express-session';
 import multer from 'multer';
 import path from 'path';
@@ -17,6 +18,7 @@ const upload = multer();
 
 app.set('trust proxy', 1);
 
+app.use(compression());
 app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
