@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-13 00:26:24
+        Last modified: 2017-03-01 15:26:18
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -73,7 +73,7 @@ module.exports = {
       inject: true,
       minify: {
         removeComments: true,
-	    collapseWhitespace: false
+        collapseWhitespace: false
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({

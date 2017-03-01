@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-13 00:27:10
-        Filename: webpack.config.js
+        Last modified: 2017-03-01 15:26:12
+        Filename: react_server/webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -73,7 +73,7 @@ module.exports = {
       inject: true,
       minify: {
         removeComments: true,
-	    collapseWhitespace: false
+        collapseWhitespace: false
       }
     }),
     new webpack.DefinePlugin({

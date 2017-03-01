@@ -1,12 +1,11 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-02-13 00:29:53
-        Filename: webpack.production.config.js
+        Last modified: 2017-03-01 15:24:29
+        Filename: react_server/webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
-let ExtractLESS = new ExtractTextPlugin('res/css/[name].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
@@ -31,8 +30,8 @@ module.exports = {
         ]
       },
       {
-        test: /\.(css|less)$/,
-        use: ExtractLESS.extract([
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract([
           {
             loader: 'css-loader',
             options: {
@@ -49,6 +48,20 @@ module.exports = {
             }
           }
         ])
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract([
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              import: false,
+              minimize: true
+            }
+          },
+          'postcss-loader'
+        ])
       }
     ]
   },
@@ -58,7 +71,7 @@ module.exports = {
       inject: true,
       minify: {
         removeComments: true,
-	    collapseWhitespace: true
+        collapseWhitespace: true
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -79,6 +92,6 @@ module.exports = {
       name: 'vendor',
       filename: 'res/js/vendor.js'
     }),
-    ExtractLESS
+    new ExtractTextPlugin('res/css/[name].css')
   ]
 };
