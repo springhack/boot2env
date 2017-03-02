@@ -1,13 +1,13 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-01 15:26:18
+        Last modified: 2017-03-02 18:14:09
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let OpenBrowserPlugin = require('open-browser-webpack-plugin');
+let path = require('path');
 
 module.exports = {
   entry: {

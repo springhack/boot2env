@@ -1,13 +1,13 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-01 15:24:41
+        Last modified: 2017-03-02 18:14:41
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let path = require('path');
 
 module.exports = {
   entry: {
