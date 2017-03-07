@@ -29,4 +29,5 @@ hostname                username        password    port    AuthKeyFilePath
 
 ### Updates
 
+> Change babel-preset-latest to babel-preset-env
 > Add loading 

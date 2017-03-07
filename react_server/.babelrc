@@ -2,10 +2,8 @@
   'env': {
     'production': {
       presets: [
-        ['latest', {
-          'es2015': {
-            'modules': false
-          }
+        ['env', {
+          modules: false
         }],
         'stage-0',
         'react'
@@ -16,7 +14,7 @@
     },
     'development': {
       presets: [
-        'latest',
+        'env',
         'stage-0',
         'react'
       ],
