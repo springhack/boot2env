@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-02 18:14:09
+        Last modified: 2017-03-07 18:36:45
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -80,7 +80,6 @@ module.exports = {
       name: 'vendor',
       filename: 'res/js/vendor.js'
     }),
-    new OpenBrowserPlugin({url: 'http://localhost:9090'}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ],
