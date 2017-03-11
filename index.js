@@ -1,9 +1,3 @@
-/**
-        Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-11 21:35:29
-        Filename: index.js
-        Description: Created by SpringHack using vim automatically.
-**/
 #!/usr/bin/env node
 
 let fs = require('fs');
@@ -35,6 +29,7 @@ if (tool.type && tool.file)
             else
                 AppPath = path.resolve(__dirname, 'react_client');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
+            console.log(ret.toString('utf-8'));
             ret = child_process.execSync('cp -rvf ' + path.resolve(AppPath, '.npmignore') + ' ' + path.resolve(tool.file, '.gitignore'));
             console.log(ret.toString('utf-8'));
         break;
