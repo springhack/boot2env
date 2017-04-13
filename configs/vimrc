@@ -1,14 +1,15 @@
 " Vim Config Here
 set nu
 set ai
-set ts=4
-set sts=4
-set sw=4
+set ts=2
+set sts=2
+set sw=2
 set bs=2
 set et
 set autochdir
 set nocompatible
 syntax on
+filetype off
 
 
 " Vim UI Config
@@ -38,12 +39,21 @@ let g:html5_event_handler_attributes_complete = 1
 let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
+"" NERDTree
 let NERDTreeChDirMode=2
+"" Markdown
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+"" ALE
+let &runtimepath.=',~/.vim/bundle/ale'
+let g:ale_sign_error = '>E'
+let g:ale_sign_warning = '>W'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 
 " Plugin Manager Here
-filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
@@ -55,6 +65,7 @@ call vundle#begin()
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'iamcco/markdown-preview.vim'
     Plugin 'majutsushi/tagbar'
+    Plugin 'w0rp/ale'
 call vundle#end()
 filetype plugin indent on
 

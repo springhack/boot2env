@@ -19,6 +19,7 @@
         'react'
       ],
       plugins: [
+        'react-hot-loader/babel',
         'babel-plugin-transform-decorators-legacy'
       ]
     }

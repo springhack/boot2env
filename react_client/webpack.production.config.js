@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-02 18:14:41
+        Last modified: 2017-04-12 23:13:53
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -12,7 +12,10 @@ let path = require('path');
 module.exports = {
   entry: {
     vendor: ['react', 'react-dom'],
-    main: path.resolve(__dirname, 'src/client/main.js')
+    main: [
+      'babel-polyfill',
+      path.resolve(__dirname, 'src/client/main.js')
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

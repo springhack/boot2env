@@ -23,11 +23,33 @@ hostname                username        password    port    AuthKeyFilePath
 
 ### coder: 
 
+> Now it's a bad command, don't use it !!!!
+
 > A command to cerate project, react component or config files.
 
 > You can run ```coder -h``` to see help
 
-### Updates
+### config files:
 
+> Need some dependencies, you can run this to get all (I think you use macOS):
+
+```
+# For powerline
+pip install powerline-status
+# For powerline fonts
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+# For ctags
+brew install ctahs
+# For ack
+brew install ack
+# For jsctags
+npm install -g git+https://github.com/ramitos/jsctags.git
+```
+
+### updates:
+
+> Update vimrc with jsctags support
 > Change babel-preset-latest to babel-preset-env
 > Add loading 

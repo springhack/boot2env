@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-12 12:30:50
-        Filename: react_server/webpack.config.js
+        Last modified: 2017-04-12 23:38:08
+        Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
 let webpack = require('webpack');
@@ -11,7 +11,11 @@ let path = require('path');
 module.exports = {
   entry: {
     vendor: ['react', 'react-dom', 'react-router'],
-    main: path.resolve(__dirname, 'src/client/main.js')
+    main: [
+      'babel-polyfill',
+      'react-hot-loader/patch',
+      path.resolve(__dirname, 'src/client/main.js')
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -22,7 +26,6 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         use: [
-          'react-hot-loader',
           'babel-loader'
         ],
         exclude: [
@@ -87,7 +90,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ],
-  devtool : 'eval-source-map',
+  devtool : 'eval',
   devServer: {
     historyApiFallback: true,
     hot: true,

@@ -1,27 +1,28 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-11 15:39:07
-        Filename: main.js
+        Last modified: 2017-04-12 23:44:54
+        Filename: src/client/main.js
         Description: Created by SpringHack using vim automatically.
 **/
-import 'babel-polyfill';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import {AppContainer} from 'react-hot-loader'
 
-import Model from './model/Model.js';
-import Routes from '../common/routes.js';
-import Config from '../common/config/Config.js';
+import Route from './route.js';
 
-import './less/main.less';
+const render = Component => {
+    ReactDOM.render(
+        <AppContainer>
+            <Component />
+        </AppContainer>,
+      document.getElementById('app')
+    )
+};
 
-window.Model || (window.Model = Model);
-
-ReactDOM.render((
-    <BrowserRouter>
-        <Switch>
-            {Routes}
-        </Switch>
-    </BrowserRouter>
-), document.getElementById('app'));
+if (process.env.NODE_ENV !== 'development')
+{
+    render(Route);
+    if (module.hot)
+        module.hot.accept('./route.js', () => render(Route));
+} else
+    ReactDOM.render(<Route />, document.getElementById('app'));

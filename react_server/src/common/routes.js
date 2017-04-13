@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-11 15:38:50
-        Filename: src/common/routes.js
+        Last modified: 2017-04-12 23:26:54
+        Filename: routes.js
         Description: Created by SpringHack using vim automatically.
 **/
 import React from 'react';
