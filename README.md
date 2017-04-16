@@ -4,6 +4,8 @@
 
 > Contain 2 command: ```coder and bootvm```
 
+[![Build Status](https://travis-ci.org/springhack/boot2env.svg?branch=master)](https://travis-ci.org/springhack/boot2env) [![NPM version](https://img.shields.io/badge/boot2env-flat-green.svg)](https://www.npmjs.com/package/boot2env)
+
 ### bootvm:
 
 > A command to connect to VirtualBox or remote SSH host.
