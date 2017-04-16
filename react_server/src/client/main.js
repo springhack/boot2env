@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-04-16 13:17:53
-        Filename: src/client/main.js
+        Last modified: 2017-04-16 13:29:01
+        Filename: react_server/src/client/main.js
         Description: Created by SpringHack using vim automatically.
 **/
 import React from 'react';
@@ -20,7 +20,7 @@ const render = Component => {
     )
 };
 
-if (process.env.NODE_ENV !== 'development')
+if (process.env.NODE_ENV !== 'production')
 {
     render(Route);
     if (module.hot)

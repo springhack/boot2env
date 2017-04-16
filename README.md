@@ -23,8 +23,6 @@ hostname                username        password    port    AuthKeyFilePath
 
 ### coder: 
 
-> Now it's a bad command, don't use it !!!!
-
 > A command to cerate project, react component or config files.
 
 > You can run ```coder -h``` to see help
@@ -41,7 +39,7 @@ git clone https://github.com/powerline/fonts.git
 cd fonts
 ./install.sh
 # For ctags
-brew install ctahs
+brew install ctags
 # For ack
 brew install ack
 # For jsctags

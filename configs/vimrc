@@ -1,10 +1,10 @@
 " Vim Config Here
 set nu
 set ai
-set ts=2
-set sts=2
-set sw=2
-set bs=2
+set ts=4
+set sts=4
+set sw=4
+set bs=4
 set et
 set autochdir
 set nocompatible
