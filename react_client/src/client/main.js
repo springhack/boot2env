@@ -1,7 +1,7 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-03-11 15:46:51
-        Filename: src/client/main.js
+        Last modified: 2017-04-16 13:09:02
+        Filename: main.js
         Description: Created by SpringHack using vim automatically.
 **/
 import React from 'react';
@@ -24,4 +24,7 @@ const render = Component => {
 render(Route);
 
 if (module.hot)
-    module.hot.accept('./route.js', () => render(Route));
+    module.hot.accept('./route.js', () => {
+        const Route = require('./route.js').default;
+        render(Route)
+    });
