@@ -13,24 +13,21 @@ import path from 'path';
 
 const upload = multer();
 
-export default app => {
+export default (app) => {
+  app.use(compression());
+  app.use(bodyparser.json());
+  app.use(bodyparser.urlencoded({ extended: true }));
+  app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: true
+    }
+  }));
+  app.use('/res', express.static(path.resolve(__dirname, '../dist/res')));
 
-    app.use(compression());
-    app.use(bodyparser.json());
-    app.use(bodyparser.urlencoded({ extended: true }));
-    app.use(session({
-        secret: 'keyboard cat',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            secure: true
-        }
-    }));
-    app.use('/res', express.static(path.resolve(__dirname, '../dist/res')));
-
-    app.post('/upload', upload.array(), (req, res, next) => {
-        console.log(req.body);
-        res.json(req.body);
-    });
-
+  app.post('/upload', upload.array(), (req, res, next) => {
+    res.json(req.body);
+  });
 };

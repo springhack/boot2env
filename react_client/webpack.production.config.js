@@ -4,10 +4,10 @@
         Filename: webpack.production.config.js
         Description: Created by SpringHack using vim automatically.
 **/
-let webpack = require('webpack');
-let ExtractTextPlugin = require("extract-text-webpack-plugin")
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: {

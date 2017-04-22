@@ -6,7 +6,9 @@
 **/
 module.exports = {
   plugins: [
+    /* eslint-disable global-require */
     require('autoprefixer'),
     require('cssnano')
+    /* eslint-enable global-require */
   ]
 };

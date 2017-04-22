@@ -5,16 +5,14 @@
         Description: Created by SpringHack using vim automatically.
 **/
 import React from 'react';
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import { Switch, BrowserRouter } from 'react-router-dom';
 
-import Routes from '../common/routes.js';
+import Routes from '../common/routes';
 
-export default () => {
-    return (
-        <BrowserRouter>
-            <Switch>
-                {Routes}
-            </Switch>
-        </BrowserRouter>
-    );
-};
+export default () => (
+  <BrowserRouter>
+    <Switch>
+      { Routes }
+    </Switch>
+  </BrowserRouter>
+);

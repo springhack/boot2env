@@ -4,11 +4,10 @@
         Filename: express_config.js
         Description: Created by SpringHack using vim automatically.
 **/
-let config = [
-    'truse proxy' : 1
+const config = [
+  'truse proxy' : 1
 ];
 
-export default app => {
-    for (let key in config)
-        app.set(key, config[key]);
+export default (app) => {
+  Object.keys(config).forEach((key) => { app.set(key, config[key]); });
 };

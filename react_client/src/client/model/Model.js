@@ -1,16 +1,16 @@
-import {useStrict, action, observable} from 'mobx'
+import { useStrict, action, observable } from 'mobx';
 
 useStrict(true);
 
 class Model {
 
-    @observable
-    state = {};
+  @observable
+  state = {};
 
-    @action
-    setState() {
-        //TODO
-    }
+  @action
+  setState(newState) {
+    Object.keys(newState).forEach((key) => { this.state[key] = newState[key]; });
+  }
 
 }
 

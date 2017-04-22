@@ -6,27 +6,30 @@
 **/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AppContainer} from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader';
 
-import Route from './route.js';
+import Route from './route';
 import './less/App.less';
 
-const render = Component => {
-    ReactDOM.render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
-      document.getElementById('app')
-    )
+const render = (Component) => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('app')
+  );
 };
 
-if (process.env.NODE_ENV !== 'production')
-{
-    render(Route);
-    if (module.hot)
-        module.hot.accept('./route.js', () => {
-            const Route = require('./route.js').default;
-            render(Route);
-        });
-} else
-    ReactDOM.render(<Route />, document.getElementById('app'));
+if (process.env.NODE_ENV !== 'production') {
+  render(Route);
+  if (module.hot) {
+    module.hot.accept('./route.js', () => {
+      /* eslint-disable global-require */
+      const newRoute = require('./route.js').default;
+      /* eslint-enable global-require */
+      render(newRoute);
+    });
+  }
+} else {
+  ReactDOM.render(<Route />, document.getElementById('app'));
+}

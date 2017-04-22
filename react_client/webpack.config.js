@@ -4,9 +4,9 @@
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -65,7 +65,8 @@ module.exports = {
               sourceMap: true,
               relativeUrls: false
             }
-        }]
+          }
+        ]
       }
     ]
   },
@@ -85,7 +86,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ],
-  devtool : 'eval',
+  devtool: 'eval',
   devServer: {
     historyApiFallback: true,
     hot: true,

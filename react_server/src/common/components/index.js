@@ -4,4 +4,4 @@
         Filename: src/common/components/index.js
         Description: Created by SpringHack using vim automatically.
 **/
-export App from './App.js';
+export App from './App';

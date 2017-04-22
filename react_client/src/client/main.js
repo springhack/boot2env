@@ -6,25 +6,26 @@
 **/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AppContainer} from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader';
 
-import Config from './config/Config.js';
-import Route from './route.js';
+import Route from './route';
 
-
-const render = Component => {
-    ReactDOM.render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
-      document.getElementById('app')
-    )
+const render = (Component) => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('app')
+  );
 };
 
 render(Route);
 
-if (module.hot)
-    module.hot.accept('./route.js', () => {
-        const Route = require('./route.js').default;
-        render(Route)
-    });
+if (module.hot) {
+  module.hot.accept('./route.js', () => {
+    /* eslint-disable global-require */
+    const newRoute = require('./route.js').default;
+    /* eslint-enable global-require */
+    render(newRoute);
+  });
+}

@@ -5,16 +5,14 @@
         Description: Created by SpringHack using vim automatically.
 **/
 import React from 'react';
-import {Route, Switch, HashRouter} from 'react-router-dom';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 
-import App from './jsx/App.js';
+import App from './jsx/App';
 
-export default () => {
-    return (
-        <HashRouter>
-            <Switch>
-                <Route exact strict path='/' component={App} />
-            </Switch>
-        </HashRouter>
-    );
-};
+export default () => (
+  <HashRouter>
+    <Switch>
+      <Route exact strict path='/' component={App} />
+    </Switch>
+  </HashRouter>
+);

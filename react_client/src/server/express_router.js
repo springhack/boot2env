@@ -4,9 +4,6 @@
         Filename: express_router.js
         Description: Created by SpringHack using vim automatically.
 **/
-import path from 'path';
-import fs from 'fs';
-
-export default app => {
-    //TODO
+export default (app) => {
+    // TODO
 };
