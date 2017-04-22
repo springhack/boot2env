@@ -1,10 +1,10 @@
 " Vim Config Here
 set nu
 set ai
-set ts=4
-set sts=4
-set sw=4
-set bs=4
+set ts=2
+set sts=2
+set sw=2
+set bs=2
 set et
 set autochdir
 set nocompatible
@@ -106,12 +106,12 @@ func! AddTitleB()
     endif
     if getline(8) != "<html>"
         call append(7,"<html>")
-        call append(8,"    <head>")
-        call append(9,"        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
-        call append(10,"        <title>Index</title>")
-        call append(11,"    </head>")
-        call append(12,"    <body>")
-        call append(13,"    </body>")
+        call append(8,"  <head>")
+        call append(9,"    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
+        call append(10,"    <title>SpringHack</title>")
+        call append(11,"  </head>")
+        call append(12,"  <body>")
+        call append(13,"  </body>")
         call append(14,"</html>")
     endif
     call setline(4,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
