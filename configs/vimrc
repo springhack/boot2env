@@ -40,6 +40,7 @@ let g:html5_rdfa_attributes_complete = 1
 let g:html5_microdata_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
 "" NERDTree
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '^node_modules$[[dir]]']
 let NERDTreeChDirMode=2
 "" Markdown
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
@@ -51,10 +52,16 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 
 " Plugin Manager Here
 set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'othree/html5.vim'
@@ -66,6 +73,8 @@ call vundle#begin()
     Plugin 'iamcco/markdown-preview.vim'
     Plugin 'majutsushi/tagbar'
     Plugin 'w0rp/ale'
+    Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -106,12 +115,12 @@ func! AddTitleB()
     endif
     if getline(8) != "<html>"
         call append(7,"<html>")
-        call append(8,"  <head>")
-        call append(9,"    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
-        call append(10,"    <title>SpringHack</title>")
-        call append(11,"  </head>")
-        call append(12,"  <body>")
-        call append(13,"  </body>")
+        call append(8,"    <head>")
+        call append(9,"        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
+        call append(10,"        <title>Index</title>")
+        call append(11,"    </head>")
+        call append(12,"    <body>")
+        call append(13,"    </body>")
         call append(14,"</html>")
     endif
     call setline(4,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
@@ -201,6 +210,7 @@ command A call BuildAll()
 command S call CompileCode()
 command D call RunResultOfGNU()
 
+" <leader> is \
 noremap <silent><tab>t :tabnew<cr>
 noremap <silent><tab>e :tabclose<cr>
 noremap <silent><tab>n :tabn<cr>
