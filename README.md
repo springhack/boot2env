@@ -34,6 +34,8 @@ hostname                username        password    port    AuthKeyFilePath
 > Need some dependencies, you can run this to get all (I think you use macOS):
 
 ```
+# For vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # For powerline
 pip install powerline-status
 # For powerline fonts
@@ -46,10 +48,13 @@ brew install ctags
 brew install ack
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
+# For colorscheme
+mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
 ```
 
 ### updates:
 
+> Update vimrc colorscheme
 > Update vimrc with jsctags support
 > Change babel-preset-latest to babel-preset-env
 > Add loading 

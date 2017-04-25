@@ -7,6 +7,8 @@ set sw=2
 set bs=2
 set et
 set autochdir
+set cursorline
+set cursorcolumn
 set nocompatible
 syntax on
 filetype off
@@ -14,6 +16,7 @@ filetype off
 
 " Vim UI Config
 "" These lines setup the environment to show graphics and colors correctly.
+colorscheme monokai
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 set t_Co=256
 let g:minBufExplForceSyntaxEnable = 1
