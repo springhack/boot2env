@@ -6,6 +6,7 @@ set sts=2
 set sw=2
 set bs=2
 set et
+set hlsearch
 set autochdir
 set cursorline
 set cursorcolumn
@@ -214,6 +215,7 @@ command S call CompileCode()
 command D call RunResultOfGNU()
 
 " <leader> is \
+"" About tab manage
 noremap <silent><tab>t :tabnew<cr>
 noremap <silent><tab>e :tabclose<cr>
 noremap <silent><tab>n :tabn<cr>
@@ -228,3 +230,5 @@ noremap <silent><leader>7 :tabn 7<cr>
 noremap <silent><leader>8 :tabn 8<cr>
 noremap <silent><leader>9 :tabn 9<cr>
 noremap <silent><leader>0 :tabn 10<cr>
+"" About search
+vnoremap // y/<c-r>"<cr>
