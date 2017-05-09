@@ -33,6 +33,8 @@ hostname                username        password    port    AuthKeyFilePath
 
 > Need some dependencies, you can run this to get all (I think you use macOS):
 
+> For YouCompleteMe, just run `./install.py --clang-completer --system-libclang`
+
 ```
 # For vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -41,6 +43,8 @@ pip install powerline-status
 # For powerline fonts
 git clone https://github.com/powerline/fonts.git
 cd fonts
+# For cmake
+brew install cmake
 ./install.sh
 # For ctags
 brew install ctags
