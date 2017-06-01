@@ -160,6 +160,7 @@ function blank()
 #Start show background 
 echo -ne "\033[40;37m"
 blank `tput cols`
+echo
 
 #Start show title
 center_2 "FBI Warning" "\033[41;37;1mFBI Warning\033[0m"
