@@ -1,6 +1,6 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-04-12 23:13:56
+        Last modified: 2017-07-02 00:11:07
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
@@ -26,6 +26,7 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         use: [
+          'react-hot-loader/webpack',
           'babel-loader'
         ],
         exclude: [
@@ -44,7 +45,12 @@ module.exports = {
               sourceMap: true
             }
           },
-          'postcss-loader'
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       },
       {
@@ -55,10 +61,16 @@ module.exports = {
             loader: 'css-loader',
             options: {
               url: false,
-              import: false
+              import: false,
+              sourceMap: true
             }
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
           {
             loader: 'less-loader',
             options: {
@@ -86,7 +98,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ],
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
     hot: true,

@@ -49,6 +49,7 @@
     "react/jsx-uses-vars": 2,
     "react/prop-types": 0,
     "react/jsx-closing-bracket-location": [1, { "location": "after-props" }],
+    "jsx-a11y/href-no-hash": 0,
     "react/sort-comp": [2, {"order": [
       "static-methods",
       "lifecycle",

@@ -1,16 +1,16 @@
 /**
         Author: SpringHack - springhack@live.cn
-        Last modified: 2017-04-12 23:38:08
+        Last modified: 2017-07-02 00:11:07
         Filename: webpack.config.js
         Description: Created by SpringHack using vim automatically.
 **/
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: {
-    vendor: ['react', 'react-dom', 'react-router'],
+    vendor: ['react', 'react-dom'],
     main: [
       'babel-polyfill',
       'react-hot-loader/patch',
@@ -26,6 +26,7 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         use: [
+          'react-hot-loader/webpack',
           'babel-loader'
         ],
         exclude: [
@@ -44,7 +45,12 @@ module.exports = {
               sourceMap: true
             }
           },
-          'postcss-loader'
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       },
       {
@@ -55,17 +61,24 @@ module.exports = {
             loader: 'css-loader',
             options: {
               url: false,
-              import: false
+              import: false,
+              sourceMap: true
             }
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true
+            }
+          },
           {
             loader: 'less-loader',
             options: {
               sourceMap: true,
               relativeUrls: false
             }
-        }]
+          }
+        ]
       }
     ]
   },
@@ -90,7 +103,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ],
-  devtool : 'eval',
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
     hot: true,
