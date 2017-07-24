@@ -43,9 +43,11 @@ pip install powerline-status
 # For powerline fonts
 git clone https://github.com/powerline/fonts.git
 cd fonts
+./install.sh
+#For python
+brew install python
 # For cmake
 brew install cmake
-./install.sh
 # For ctags
 brew install ctags
 # For ack
@@ -53,11 +55,12 @@ brew install ack
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
 # For colorscheme
-mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
+mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradish256/master/colors/horseradish256.vim -o ~/.vim/colors/horseradish256.vim
 ```
 
 ### updates:
 
+> Update webpack and plugins, coloscheme
 > Update vimrc colorscheme
 > Update vimrc with jsctags support
 > Change babel-preset-latest to babel-preset-env
