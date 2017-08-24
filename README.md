@@ -60,8 +60,14 @@ mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradis
 
 ### updates:
 
+> Update vimrc
+
 > Update webpack and plugins, coloscheme
+
 > Update vimrc colorscheme
+
 > Update vimrc with jsctags support
+
 > Change babel-preset-latest to babel-preset-env
+
 > Add loading 

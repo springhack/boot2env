@@ -17,7 +17,7 @@ filetype off
 
 " Vim UI Config
 "" These lines setup the environment to show graphics and colors correctly.
-colorschemei horseradish256
+colorscheme horseradish256
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 set t_Co=256
 let g:minBufExplForceSyntaxEnable = 1
@@ -56,6 +56,7 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fixers = { 'javascript': ['eslint'] }
 "" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -83,6 +84,7 @@ call vundle#begin()
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'mileszs/ack.vim'
     Plugin 'valloric/YouCompleteMe'
+    Plugin 'moll/vim-node'
 call vundle#end()
 filetype plugin indent on
 
@@ -93,75 +95,75 @@ autocmd BufNewFile,BufRead * exec ":call AddTitle()"
 
 " User Define Functions And Shortcuts
 func! AddTitleA()
-    if getline(1) != "/**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
+    if getline(1) != "/*" && getline(2) != "        Author: SpringHack - springhack@live.cn"
         if getline(1) != ""
-            call append(0,"/**")
+            call append(0, "/*")
         else
-            call setline(1,"/**")
+            call setline(1, "/*")
         endif
-        call append(1,"        Author: SpringHack - springhack@live.cn")
-        call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(3,"        Filename: ".expand("%"))
-        call append(4,"        Description: Created by SpringHack using vim automatically.")
-        call append(5,"**/")
+        call append(1, "        Author: SpringHack - springhack@live.cn")
+        call append(2, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(3, "        Filename: ".expand("%"))
+        call append(4, "        Description: Created by SpringHack using vim automatically.")
+        call append(5, " */")
     endif
-    call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call setline(4,"        Filename: ".expand("%"))
+    call setline(3, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(4, "        Filename: ".expand("%"))
 endfunc
 
 func! AddTitleB()
     if getline(1) != "<!DOCTYPE html>"
-        call append(0,"<!DOCTYPE html>")
+        call append(0, "<!DOCTYPE html>")
     endif
     if getline(2) != "<!--" && getline(3) != "        Author: SpringHack - springhack@live.cn"
-        call append(1,"<!--")
-        call append(2,"        Author: SpringHack - springhack@live.cn")
-        call append(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(4,"        Filename: ".expand("%"))
-        call append(5,"        Description: Created by SpringHack using vim automatically.")
-        call append(6,"-->")
+        call append(1, "<!--")
+        call append(2, "        Author: SpringHack - springhack@live.cn")
+        call append(3, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(4, "        Filename: ".expand("%"))
+        call append(5, "        Description: Created by SpringHack using vim automatically.")
+        call append(6, "-->")
     endif
     if getline(8) != "<html>"
-        call append(7,"<html>")
-        call append(8,"    <head>")
-        call append(9,"        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
-        call append(10,"        <title>Index</title>")
-        call append(11,"    </head>")
-        call append(12,"    <body>")
-        call append(13,"    </body>")
-        call append(14,"</html>")
+        call append(7, "<html>")
+        call append(8, "    <head>")
+        call append(9, "        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
+        call append(10, "        <title>Index</title>")
+        call append(11, "    </head>")
+        call append(12, "    <body>")
+        call append(13, "    </body>")
+        call append(14, "</html>")
     endif
-    call setline(4,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call setline(5,"        Filename: ".expand("%"))
+    call setline(4, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(5, "        Filename: ".expand("%"))
 endfunc
 
 func! AddTitleC()
-    if getline(1) != "<?php /**" && getline(2) != "        Author: SpringHack - springhack@live.cn"
+    if getline(1) != "<?php /*" && getline(2) != "        Author: SpringHack - springhack@live.cn"
         if getline(1) != ""
-            call append(0,"<?php /**")
+            call append(0, "<?php /*")
         else
-            call setline(1,"<?php /**")
+            call setline(1, "<?php /*")
         endif
-        call append(1,"        Author: SpringHack - springhack@live.cn")
-        call append(2,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(3,"        Filename: ".expand("%"))
-        call append(4,"        Description: Created by SpringHack using vim automatically.")
-        call append(5,"**/ ?>")
+        call append(1, "        Author: SpringHack - springhack@live.cn")
+        call append(2, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(3, "        Filename: ".expand("%"))
+        call append(4, "        Description: Created by SpringHack using vim automatically.")
+        call append(5, " */ ?>")
     endif
-    call setline(3,"        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call setline(4,"        Filename: ".expand("%"))
+    call setline(3, "        Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call setline(4, "        Filename: ".expand("%"))
 endfunc
 
 func! AddTitle()
-    let setA = ["h","c","cpp","js","css","java","javascript"]
-    let setB = ["htm","html"]
-    for i in range(1,len(setA))
-        if &filetype == get(setA,i-1)
+    let setA = ["h", "c", "cpp", "js", "css", "java", "javascript"]
+    let setB = ["htm", "html"]
+    for i in range(1, len(setA))
+        if &filetype == get(setA, i - 1)
             call AddTitleA()
         endif
     endfor
-    for i in range(1,len(setB))
-        if &filetype == get(setB,i-1)
+    for i in range(1, len(setB))
+        if &filetype == get(setB, i - 1)
             call AddTitleB()
         endif
     endfor
