@@ -4,6 +4,7 @@
   "description": "A toolkit to help dev.",
   "main": "index.js",
   "scripts": {
+    "start": "echo What are you doing??????",
     "test": "echo SpringHack"
   },
   "bin": {
