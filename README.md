@@ -1,4 +1,4 @@
-# boot2env
+# Boot2env
 
 > Just a toolkit I wrote to help my dev.
 
@@ -6,7 +6,7 @@
 
 [![Build Status](https://travis-ci.org/springhack/boot2env.svg?branch=master)](https://travis-ci.org/springhack/boot2env) [![NPM version](https://img.shields.io/badge/boot2env-flat-green.svg)](https://www.npmjs.com/package/boot2env)
 
-### bootvm:
+### Command ```bootvm```:
 
 > A command to connect to VirtualBox or remote SSH host.
 
@@ -23,13 +23,13 @@ hostname                username        password    port    AuthKeyFilePath
 
 > this command try to connect via password default, place ```*``` to use AuthKeyFile
 
-### coder: 
+### Command ```coder```: 
 
 > A command to cerate project, react component or config files.
 
 > You can run ```coder -h``` to see help
 
-### config files:
+### Config files:
 
 > Need some dependencies, you can run this to get all (I think you use macOS):
 
@@ -44,7 +44,9 @@ pip install powerline-status
 git clone https://github.com/powerline/fonts.git
 cd fonts
 ./install.sh
-#For python
+# For bash_completion
+brew install bash-completion
+# For python
 brew install python
 # For cmake
 brew install cmake
@@ -58,10 +60,16 @@ npm install -g git+https://github.com/ramitos/jsctags.git
 mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradish256/master/colors/horseradish256.vim -o ~/.vim/colors/horseradish256.vim
 ```
 
-### updates:
+### Updates:
+
+> Update vimrc
 
 > Update webpack and plugins, coloscheme
+
 > Update vimrc colorscheme
+
 > Update vimrc with jsctags support
+
 > Change babel-preset-latest to babel-preset-env
+
 > Add loading 
