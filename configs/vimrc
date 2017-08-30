@@ -1,11 +1,11 @@
 " Vim Config Here
 set nu
 set ai
+set et
 set ts=2
-set sts=2
 set sw=2
 set bs=2
-set et
+set sts=2
 set hlsearch
 set autochdir
 set cursorline
