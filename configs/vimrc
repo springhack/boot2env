@@ -195,14 +195,6 @@ func! RunResultOfGNU()
     endif
 endfunc
 
-func! RunPython()
-    !clear && python %
-endfunc
-
-func! RunNodejs()
-    !clear && node %
-endfunc
-
 func! BuildAll()
     w
     if &filetype == "cpp"
@@ -213,12 +205,27 @@ func! BuildAll()
         call RunPython()
     elseif &filetype == "javascript" || &filetype == "js"
         call RunNodejs()
+    elseif &filetype == "php"
+        call RunPHP()
     endif
+endfunc
+
+func! RunPython()
+    !clear && python %
+endfunc
+
+func! RunNodejs()
+    !clear && node %
+endfunc
+
+func! RunPHP()
+    !clear && php %
 endfunc
 
 command A call BuildAll()
 command S call CompileCode()
 command D call RunResultOfGNU()
+
 
 " <leader> is \
 "" About tab manage
@@ -236,5 +243,10 @@ noremap <silent><leader>7 :tabn 7<cr>
 noremap <silent><leader>8 :tabn 8<cr>
 noremap <silent><leader>9 :tabn 9<cr>
 noremap <silent><leader>0 :tabn 10<cr>
-"" About search
+
+
+" About search
+"" In file search
 vnoremap // y/<c-r>"<cr>
+"" Ack search
+vnoremap \\ y:Ack! <c-r>"<cr>
