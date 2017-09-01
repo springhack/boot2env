@@ -1,3 +1,9 @@
+/*
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2017-09-01 21:28:19
+        Filename: index.js
+        Description: Created by SpringHack using vim automatically.
+ */
 #!/usr/bin/env node
 
 let fs = require('fs');
@@ -10,7 +16,7 @@ let AppPath;
 tool
     .version('0.0.1')
     .usage('[options]')
-    .option('-t, --type <value>', 'What to create: project, component, vimrc, bashrc')
+    .option('-t, --type <value>', 'What to create: project, component, vimrc, bashrc, tmux')
     .option('-f, --file <value>', 'File to cerate')
     .option('-s, --ssr', 'SSR enable: default value is false')
     .parse(process.argv);
