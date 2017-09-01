@@ -52,6 +52,8 @@ brew install python
 brew install cmake
 # For ctags
 brew install ctags
+# For tmux
+brew install tmux
 # For ack
 brew install ack
 # For jsctags

@@ -1,3 +1,9 @@
+/*
+        Author: SpringHack - springhack@live.cn
+        Last modified: 2017-09-01 21:20:26
+        Filename: index.js
+        Description: Created by SpringHack using vim automatically.
+ */
 #!/usr/bin/env node
 
 let fs = require('fs');
@@ -48,6 +54,12 @@ if (tool.type && tool.file)
         case 'bashrc':
         case 'b':
             AppPath = path.resolve(__dirname, 'configs/bashrc');
+            ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
+            console.log(ret.toString('utf-8'));
+        break;
+        case 'tmux':
+        case 't':
+            AppPath = path.resolve(__dirname, 'configs/tmux');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;

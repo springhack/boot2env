@@ -1,0 +1,100 @@
+# Author: SpringHack - springhack@live.cn
+# Last modified: 2017-09-01 17:47:14
+# Filename: main.c
+# Description: Created by SpringHack using vim automatically.
+
+
+# 更改前缀
+unbind C-b
+set -g prefix `
+
+
+# 重新加载配置文件
+bind r source-file ~/.tmux.conf \; display "configuration Roloaded!"
+
+
+# copy-mode
+setw -g mode-keys vi
+bind V copy-mode
+
+
+# 设置256色模式
+set -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ",screen-256color:Tc"
+
+
+# status line
+# window status
+setw -g window-status-style fg=colour219,bg=colour236
+setw -g window-status-current-style fg=colour87,bg=colour236,bold
+setw -g window-status-format " #I#[fg=colour237]: #[fg=colour250]#W#[fg=colour244]#F "
+setw -g window-status-current-format " #I#[fg=colour250]: #[fg=colour255]#W#[fg=colour50]#F "
+# left & right
+set -g status-style fg=colour13,bg=colour232,dim
+set -g status-left-length 40
+set -g status-left "#[fg=#176800,bg=#afd700,bold] SpringHack: #S #[fg=#afd700,bg=#000000,bold]"
+set -g status-right "#[fg=#176800,bg=#afd700,bold] %Y.%m.%d #[fg=#176800,bg=#afd700,bold] %H:%M "
+
+
+# 状态栏刷新周期
+set -g status-interval 60
+
+
+# 窗口列表居中
+set -g status-justify centre
+
+
+# 命令行
+set -g message-command-style fg=white,bg=black,bright
+
+
+# Pane color
+set -g pane-border-style fg=white,bg=black
+set -g pane-active-border-style fg=colour087,bg=black
+
+
+# Clock
+setw -g clock-mode-colour colour39
+setw -g clock-mode-style 24
+
+
+# 分割Pane
+unbind '"'
+unbind %
+bind v split-window -h  -c '#{pane_current_path}'
+bind s split-window -v  -c '#{pane_current_path}'
+
+
+# Window
+bind c new-window -c "#{pane_current_path}"
+set -g base-index 1
+setw -g pane-base-index 1
+
+
+# 在pane之间移动
+bind \; select-pane -L
+bind / select-pane -D
+bind [ select-pane -U
+bind "'" select-pane -R
+
+
+# 调整pane大小
+bind : resize-pane -L 5
+bind ? resize-pane -D 5
+bind { resize-pane -U 5
+bind '"' resize-pane -R 5
+
+
+# 在window之间移动
+bind -r C-w select-window -t :-
+bind -r C-W select-window -t :+
+
+
+# List of plugins
+#set -g @plugin 'tmux-plugins/tpm'
+#set -g @plugin 'tmux-plugins/tmux-sensible'
+#set -g @plugin 'odedlaz/tmux-onedark-theme'
+
+
+# Initialize Tmux Plugin manager
+run '~/.tmux/plugins/tpm/tpm';
