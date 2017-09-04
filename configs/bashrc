@@ -97,6 +97,7 @@ alias ls='ls -G'
 alias ll='ls -lG'
 alias la='ls -AG'
 alias l='ls -CFG'
+alias tt=tmux
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
