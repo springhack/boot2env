@@ -54,8 +54,8 @@ brew install cmake
 brew install ctags
 # For tmux
 brew install tmux
-# For ack
-brew install ack
+# For ack.vim
+brew install the_silver_searcher
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
 # For colorscheme
@@ -63,6 +63,8 @@ mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradis
 ```
 
 ### Updates:
+
+> Update vimrc & tmux
 
 > Update vimrc
 
