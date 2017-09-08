@@ -54,6 +54,8 @@ brew install cmake
 brew install ctags
 # For tmux
 brew install tmux
+# For reattach-to-user-namespace
+brew install reattach-to-user-namespace
 # For ack.vim
 brew install the_silver_searcher
 # For jsctags
