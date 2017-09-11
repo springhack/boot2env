@@ -36,16 +36,12 @@ hostname                username        password    port    AuthKeyFilePath
 > For YouCompleteMe, just run `./install.py --clang-completer --system-libclang`
 
 ```
-# For vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # For powerline
 pip install powerline-status
 # For powerline fonts
 git clone https://github.com/powerline/fonts.git
 cd fonts
 ./install.sh
-# For bash_completion
-brew install bash-completion
 # For python
 brew install python
 # For cmake
@@ -54,17 +50,25 @@ brew install cmake
 brew install ctags
 # For tmux
 brew install tmux
-# For reattach-to-user-namespace
-brew install reattach-to-user-namespace
 # For ack.vim
 brew install the_silver_searcher
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
-# For colorscheme
+# For bash_completion
+brew install bash-completion
+# For reattach-to-user-namespace
+brew install reattach-to-user-namespace
+# For tpm
+mkdir -p ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# For vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# For vim colorscheme
 mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradish256/master/colors/horseradish256.vim -o ~/.vim/colors/horseradish256.vim
 ```
 
 ### Updates:
+
+> Add tmux plugins manager
 
 > Update vimrc & tmux
 
