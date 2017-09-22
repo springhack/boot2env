@@ -3,7 +3,7 @@
         Last modified: 2017-03-11 15:29:14
         Filename: express_middleware.js
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import compression from 'compression';
 import bodyparser from 'body-parser';
 import session from 'express-session';

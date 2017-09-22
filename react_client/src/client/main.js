@@ -3,7 +3,7 @@
         Last modified: 2017-04-16 13:09:02
         Filename: main.js
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';

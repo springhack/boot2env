@@ -3,7 +3,7 @@
         Last modified: 2017-04-16 13:08:37
         Filename: src/client/jsx/App.js
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import React from 'react';
 import { observer } from 'mobx-react';
 
@@ -19,4 +19,4 @@ export default @observer class extends React.Component {
       <div>React Component</div>
     );
   }
-}
+};

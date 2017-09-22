@@ -3,7 +3,7 @@
         Last modified: 2017-04-16 13:29:01
         Filename: react_server/src/client/main.js
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';

@@ -3,7 +3,7 @@
         Last modified: 2017-04-12 23:28:37
         Filename: express_router.js
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import React from 'react';

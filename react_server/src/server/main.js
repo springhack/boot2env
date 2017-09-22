@@ -3,7 +3,7 @@
         Last modified: 2017-03-11 15:00:16
         Filename: main
         Description: Created by SpringHack using vim automatically.
-**/
+* */
 import 'babel-polyfill';
 
 import express from 'express';
