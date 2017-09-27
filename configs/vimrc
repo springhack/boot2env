@@ -7,10 +7,10 @@ set sw=2
 set bs=2
 set sts=2
 set hlsearch
-set autochdir
 set cursorline
 set cursorcolumn
 set nocompatible
+set encoding=utf-8
 syntax on
 filetype off
 
@@ -39,7 +39,11 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 
 " Plugin Config Here
 "" Ack
+let g:ack_ignore = ['node_modules', 'dist']
 let g:ackprg = 'ag --nogroup --nocolor --column'
+if len(g:ack_ignore) != 0
+  let g:ackprg = g:ackprg . ' --ignore ' . join(g:ack_ignore, ' --ignore ')
+endif
 "" othree/html5.vim
 let g:html5_event_handler_attributes_complete = 1
 let g:html5_rdfa_attributes_complete = 1
@@ -87,7 +91,6 @@ call vundle#begin()
     Plugin 'mileszs/ack.vim'
     Plugin 'moll/vim-node'
     Plugin 'valloric/YouCompleteMe'
-    Plugin 'mattn/vim-terminal'
 call vundle#end()
 filetype plugin indent on
 
@@ -225,9 +228,17 @@ func! RunPHP()
     !clear && php %
 endfunc
 
+" Command define
+"" Auto insert header
 command A call BuildAll()
 command S call CompileCode()
 command D call RunResultOfGNU()
+"" Get into current dir of file
+command CWD lcd %:p:h
+"" Git command
+command! -nargs=* Glog execute 'silent !tig log <args> ' . expand('%') | redraw!
+command! -nargs=* Gblame execute 'silent !tig blame <args> ' . expand('%') | redraw!
+command! -nargs=* Gstatus execute 'silent !tig status <args>' | redraw!
 
 
 " <leader> is \
