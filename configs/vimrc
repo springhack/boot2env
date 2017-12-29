@@ -68,6 +68,8 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+"" Riainbow
+let g:rainbow_active = 1
 "" YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 set completeopt-=preview
@@ -90,6 +92,7 @@ call vundle#begin()
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'mileszs/ack.vim'
     Plugin 'moll/vim-node'
+    Plugin 'luochen1990/rainbow'
     Plugin 'valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
