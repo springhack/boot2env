@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "node": {},
+    "es_modules": {}
+  },
+  "libs": [
+    "ecmascript",
+    "browser",
+    "jquery",
+    "ecma5",
+    "ecma6",
+    "react",
+    "redux",
+    "mobx"
+  ],
+  "ecmaVersion": 6
+}

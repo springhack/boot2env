@@ -37,7 +37,7 @@ hostname                username        password    port    AuthKeyFilePath
 
 ```
 # For powerline
-pip install powerline-status
+pip3 install powerline-status
 # For powerline fonts
 git clone https://github.com/powerline/fonts.git
 cd fonts
