@@ -17,7 +17,7 @@ filetype off
 
 " Vim UI Config
 "" These lines setup the environment to show graphics and colors correctly.
-colorscheme horseradish256
+colorscheme monokai_pro
 set rtp+=/usr/local/lib/python3.6/site-packages/powerline/bindings/vim
 set t_Co=256
 let g:minBufExplForceSyntaxEnable = 1

@@ -63,7 +63,7 @@ mkdir -p ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugin
 # For vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # For vim colorscheme
-mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/cnj4/horseradish256/master/colors/horseradish256.vim -o ~/.vim/colors/horseradish256.vim
+mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/Erichain/vim-monokai-pro/master/colors/monokai_pro.vim -o ~/.vim/colors/monokai_pro.vim
 ```
 
 ### Updates:
