@@ -1,9 +1,3 @@
-/*
-        Author: SpringHack - springhack@live.cn
-        Last modified: 2018-03-16 17:11:44
-        Filename: index.js
-        Description: Created by SpringHack using vim automatically.
- */
 #!/usr/bin/env node
 
 let fs = require('fs');
