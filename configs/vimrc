@@ -88,6 +88,7 @@ let g:ycm_confirm_extra_conf = 0
 set completeopt-=preview
 "" Local vimrc
 let g:localvimrc_ask = 0
+let g:localvimrc_sandbox = 0
 
 
 " Plugin Manager Here

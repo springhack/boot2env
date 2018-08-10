@@ -30,8 +30,6 @@ if (tool.type && tool.file)
                 AppPath = path.resolve(__dirname, 'react_client');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
-            ret = child_process.execSync('cp -rvf ' + path.resolve(AppPath, '.npmignore') + ' ' + path.resolve(tool.file, '.gitignore'));
-            console.log(ret.toString('utf-8'));
         break;
         case 'component':
         case 'c':
