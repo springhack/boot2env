@@ -1,0 +1,16 @@
+---
+Language: Cpp
+BasedOnStyle: WebKit
+IndentWidth: 2
+AccessModifierOffset: -2
+ColumnLimit: 140
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: All
+AlignEscapedNewlines: Left
+IndentPPDirectives: AfterHash
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterEnum: false
+  AfterStruct: false
+  SplitEmptyFunction: false

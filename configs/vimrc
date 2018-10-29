@@ -71,7 +71,9 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \  'css': ['stylelint'],
 \  'less': ['stylelint'],
-\  'javascript': ['eslint']
+\  'javascript': ['eslint'],
+\  'c': ['clang-format'],
+\  'cpp': ['clang-format']
 \}
 "" TypeScript
 let g:typescript_indent_disable = 1
@@ -97,21 +99,22 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'embear/vim-localvimrc'
+    Plugin 'dbakker/vim-projectroot'
     Plugin 'othree/html5.vim'
-    Plugin 'gorodinskiy/vim-coloresque'
     Plugin 'othree/yajs.vim'
     Plugin 'othree/es.next.syntax.vim'
+    Plugin 'leafgarland/typescript-vim'
+    Plugin 'moll/vim-node'
+    Plugin 'keith/swift.vim'
+    Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'mileszs/ack.vim'
+    Plugin 'w0rp/ale'
+    Plugin 'valloric/YouCompleteMe'
     Plugin 'scrooloose/nerdtree'
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'iamcco/markdown-preview.vim'
     Plugin 'majutsushi/tagbar'
-    Plugin 'w0rp/ale'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'mileszs/ack.vim'
-    Plugin 'moll/vim-node'
-    Plugin 'valloric/YouCompleteMe'
-    Plugin 'dbakker/vim-projectroot'
-    Plugin 'leafgarland/typescript-vim'
+    Plugin 'gorodinskiy/vim-coloresque'
 call vundle#end()
 filetype plugin indent on
 

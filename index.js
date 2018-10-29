@@ -10,18 +10,16 @@ let AppPath;
 tool
     .version('0.0.1')
     .usage('[options]')
-    .option('-t, --type <value>', 'What to create: project, component, vimrc, bashrc, tmux, tern')
+    .option('-t, --type <value>', 'What to create: project, component, vimrc, bashrc, tmux, clang-format')
     .option('-f, --file <value>', 'File to cerate')
     .option('-s, --ssr', 'SSR enable: default value is false')
     .parse(process.argv);
 
 console.log('Starting job ...');
 
-if (tool.type && tool.file)
-{
+if (tool.type && tool.file) {
     let ret;
-    switch (tool.type)
-    {
+    switch (tool.type) {
         case 'project':
         case 'p':
             if (tool.ssr)
@@ -55,9 +53,9 @@ if (tool.type && tool.file)
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;
-        case 'tern':
-        case 'te':
-            AppPath = path.resolve(__dirname, 'configs/tern');
+        case 'clang-format':
+        case 'cf':
+            AppPath = path.resolve(__dirname, 'configs/clang-format');
             ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
             console.log(ret.toString('utf-8'));
         break;
