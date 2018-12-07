@@ -85,8 +85,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 "" YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_max_diagnostics_to_display = 0
+let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
-
 set completeopt-=preview
 "" Local vimrc
 let g:localvimrc_ask = 0
