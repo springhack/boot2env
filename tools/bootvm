@@ -169,14 +169,15 @@ def opt_ssh():
         else:
             f.write('spawn ssh %s@%s -p %s -i %s\n' % (host[1], host[0], host[3], host[4]))
         f.write(
-r'''
+                r'''
+set timeout 7
 expect {
-    "yes/no" { send "yes\r";exp_continue }
-    "password:" { send "%s\r" }
+    "yes/no" { send "yes\r"; exp_continue }
+    "assword" { send "%s\r" }
+    "from" { interact }
 }
 ''' % host[2]
-            )
-        f.write('expect "*from*"\ninteract\n')
+)
     os.chmod(tmp, 0o755)
     os.system(tmp)
     os.remove(tmp)
