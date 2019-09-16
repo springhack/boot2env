@@ -116,6 +116,7 @@ call vundle#begin()
   Plugin 'majutsushi/tagbar'
   Plugin 'gorodinskiy/vim-coloresque'
   Plugin 'mtdl9/vim-log-highlighting'
+  Plugin 'soft-aesthetic/soft-era-vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -190,7 +191,7 @@ func! AddTitle()
   if fline[0:1] == "#!"
     return
   endif
-  let setA = ["h", "c", "cpp", "js", "css", "java", "javascript"]
+  let setA = ["h", "c", "cpp", "js", "css", "java", "javascript", "typescript"]
   let setB = ["htm", "html"]
   for i in range(1, len(setA))
     if &filetype == get(setA, i - 1)
@@ -293,3 +294,4 @@ noremap <silent><leader>0 :tabn 10<cr>
 vnoremap // y/<c-r>"<cr>
 "" Ack search
 vnoremap \\ y:Ack! <c-r>"<cr>
+
