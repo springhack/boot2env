@@ -176,7 +176,8 @@ blank `tput cols`
 echo -e "\033[0m"
 
 # PATH define
+eval REAL_HOME=~
 export NODE_PATH=./node_modules/.bin
 export BREW_PATH=/usr/local/bin:/usr/local/sbin
-export ANDROID_PATH=/Users/SpringHack/Library/Android/sdk/platform-tools:/Users/SpringHack/Library/Android/ndk
+export ANDROID_PATH=$REAL_HOME/Library/Android/sdk/platform-tools:$REAL_HOME/Library/Android/ndk
 export PATH=$NODE_PATH:$BREW_PATH:$ANDROID_PATH:$PATH

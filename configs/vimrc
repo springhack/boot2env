@@ -104,6 +104,7 @@ call vundle#begin()
   Plugin 'othree/yajs.vim'
   Plugin 'othree/es.next.syntax.vim'
   Plugin 'leafgarland/typescript-vim'
+  Plugin 'ianks/vim-tsx'
   Plugin 'moll/vim-node'
   Plugin 'keith/swift.vim'
   Plugin 'ctrlpvim/ctrlp.vim'
@@ -116,7 +117,6 @@ call vundle#begin()
   Plugin 'majutsushi/tagbar'
   Plugin 'gorodinskiy/vim-coloresque'
   Plugin 'mtdl9/vim-log-highlighting'
-  Plugin 'soft-aesthetic/soft-era-vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -126,26 +126,40 @@ autocmd BufNewFile,BufRead * exec ":call AddTitle()"
 
 
 " User Define Functions And Shortcuts
-func! AddTitleA()
-  if getline(1) != "/*" && getline(2) != " *  Author: SpringHack - springhack@live.cn"
+func! AddTitleClike()
+  let f_line = getline(1)
+  "" Detect shebang
+  if f_line[0:2] == "#!"
+    return
+  endif
+  "" C-like language
+  let comment_prefix = "/*"
+  let comment_suffix = " */"
+  "" Detect php
+  if &filetype == "php"
+    let comment_prefix = "<?php /*"
+    let comment_suffix = " */ ?>"
+  endif
+  "" Add tilte
+  if getline(1) != comment_prefix && getline(2) != " *  Author: SpringHack - springhack@live.cn"
     if getline(1) != ""
-      call append(0, "/*")
+      call append(0, comment_prefix)
     else
-      call setline(1, "/*")
+      call setline(1, comment_prefix)
     endif
     call append(1, " *  Author: SpringHack - springhack@live.cn")
     call append(2, " *  Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
     call append(3, " *  Filename: ".expand("%"))
     call append(4, " *  Description: Created by SpringHack using vim automatically.")
-    call append(5, " */")
+    call append(5, comment_suffix)
   endif
   call setline(3, " *  Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
   call setline(4, " *  Filename: ".expand("%"))
 endfunc
 
-func! AddTitleB()
-  if getline(1) != "<!DOCTYPE html>" && getline(1) != "<!doctype html>"
-    call append(0, "<!DOCTYPE html>")
+func! AddTitleHTML()
+  if tolower(getline(1)) != "<!doctype html>"
+    call append(0, "<!doctype html>")
   endif
   if getline(2) != "<!--" && getline(3) != "  Author: SpringHack - springhack@live.cn"
     call append(1, "<!--")
@@ -169,81 +183,50 @@ func! AddTitleB()
   call setline(5, "  Filename: ".expand("%"))
 endfunc
 
-func! AddTitleC()
-  if getline(1) != "<?php /*" && getline(2) != "  Author: SpringHack - springhack@live.cn"
-    if getline(1) != ""
-      call append(0, "<?php /*")
-    else
-      call setline(1, "<?php /*")
-    endif
-    call append(1, "  Author: SpringHack - springhack@live.cn")
-    call append(2, "  Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call append(3, "  Filename: ".expand("%"))
-    call append(4, "  Description: Created by SpringHack using vim automatically.")
-    call append(5, " */ ?>")
-  endif
-  call setline(3, "  Last modified: ".strftime("%Y-%m-%d %H:%M:%S"))
-  call setline(4, "  Filename: ".expand("%"))
-endfunc
-
 func! AddTitle()
   let fline = getline(1)
   if fline[0:1] == "#!"
     return
   endif
-  let setA = ["h", "c", "cpp", "js", "css", "java", "javascript", "typescript"]
+  let setA = ["h", "c", "cpp", "php", "js", "css", "java", "javascript", "typescript"]
   let setB = ["htm", "html"]
   for i in range(1, len(setA))
     if &filetype == get(setA, i - 1)
-      call AddTitleA()
+      call AddTitleClike()
     endif
   endfor
   for i in range(1, len(setB))
     if &filetype == get(setB, i - 1)
-      call AddTitleB()
+      call AddTitleHTML()
     endif
   endfor
-  if &filetype == "php"
-    call AddTitleC()
-  endif
 endfunc
 
 func! CompileCode()
   w
   if &filetype == "cpp"
-    call CompileGpp()
+    call CompileGCC()
   elseif &filetype == "c"
-    call CompileGcc()
+    call CompileGPP()
   endif
 endfunc
 
-func! CompileGcc()
-  !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -g % -o %<
+func! CompileGCC()
+  !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -ldl -lm -g % -o %<
 endfunc
 
-func! CompileGpp()
-  !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -g % -o %<
+func! CompileGPP()
+  !clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -ldl -lm -g % -o %<
 endfunc
 
-func! RunResultOfGNU()
+func! RunResultBinary()
   if &filetype == "c" || &filetype == "cpp"
     !clear && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<
   endif
 endfunc
 
-func! BuildAll()
-  w
-  if &filetype == "cpp"
-    exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
-  elseif &filetype == "c"
-    exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
-  elseif &filetype == "python"
-    call RunPython()
-  elseif &filetype == "javascript" || &filetype == "js"
-    call RunNodejs()
-  elseif &filetype == "php"
-    call RunPHP()
-  endif
+func! RunSourceFile()
+  !clear && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && PATH=.:$PATH %
 endfunc
 
 func! RunPython()
@@ -258,11 +241,28 @@ func! RunPHP()
   !clear && php %
 endfunc
 
+func! BuildAll()
+  w
+  if &filetype == "cpp"
+    exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && g++ -std=c++17 -Wall -ldl -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
+  elseif &filetype == "c"
+    exec "!clear && echo -e '\033[0;32;1m>>>编译结果：\033[0m' && gcc -Wall -ldl -lm -g % -o %< && echo -e '\033[0;32;1m>>>运行结果：\033[0m' && ./%<"
+  elseif &filetype == "python"
+    call RunPython()
+  elseif &filetype == "javascript" || &filetype == "js"
+    call RunNodejs()
+  elseif &filetype == "php"
+    call RunPHP()
+  else
+    call RunSourceFile()
+  endif
+endfunc
+
 " Command define
 "" Auto insert header
 command A call BuildAll()
 command S call CompileCode()
-command D call RunResultOfGNU()
+command D call RunResultBinary()
 "" Get into current dir of file
 command CWD lcd %:p:h
 "" Git command
