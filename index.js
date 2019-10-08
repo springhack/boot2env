@@ -10,7 +10,7 @@ let AppPath;
 tool
   .version('0.0.1')
   .usage('[options]')
-  .option('-t, --type <value>', 'What to create: project, vimrc, bashrc, tmux, clang-format')
+  .option('-t, --type <value>', 'What to create: project, vimrc, zshrc, bashrc, tmux, clang-format')
   .option('-f, --file <value>', 'File to cerate')
   .parse(process.argv);
 
@@ -28,6 +28,12 @@ if (tool.type && tool.file) {
     case 'vimrc':
     case 'v':
       AppPath = path.resolve(__dirname, 'configs/vimrc');
+      ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
+      console.log(ret.toString('utf-8'));
+      break;
+    case 'zshrc':
+    case 'z':
+      AppPath = path.resolve(__dirname, 'configs/zshrc');
       ret = child_process.execSync('cp -rvf ' + AppPath + ' ' + path.resolve(tool.file));
       console.log(ret.toString('utf-8'));
       break;

@@ -38,10 +38,6 @@ hostname                username        password    port    AuthKeyFilePath
 ```
 # For powerline
 pip3 install powerline-status
-# For powerline fonts
-git clone https://github.com/powerline/fonts.git
-cd fonts
-./install.sh
 # For python
 brew install python
 # For cmake
@@ -54,8 +50,6 @@ brew install tmux
 brew install the_silver_searcher
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
-# For bash_completion
-brew install bash-completion
 # For reattach-to-user-namespace
 brew install reattach-to-user-namespace
 # For tpm
