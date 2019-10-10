@@ -431,17 +431,6 @@ __git_ps1 ()
 }
 }
 
-# Zsh Options
-setopt PROMPT_SUBST
-autoload -U colors && colors
-autoload -U compinit && compinit
-export PROMPT_EOL_MARK=PROMPT_EOL_MARK='%{$fg[red]%}«EOF»%{$reset_color%}'
-
-# Zsh Prompt
-PROMPT=$'%{$fg[red]%}┌─$([[ \$? != 0 ]] && echo \"[✘]\")[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m%{$fg[red]%}]─[%{$fg[blue]%}%~%{$fg[red]%}]\n└─'
-PROMPT=$PROMPT$'%{$fg[yellow]%}$(__git_ps1 "< %s >")%{$fg[red]%}'
-PROMPT=$PROMPT$'─╼ %{$fg[yellow]%}%#%{$reset_color%} '
-
 # Zsh Banner
 () {
 __zshrc_center() {
@@ -496,6 +485,17 @@ __zshrc_center "(Title 17, United States Code, Section 506)."
 __zshrc_blank $(tput cols)
 echo -e "\e[0m"
 }
+
+# Zsh Options
+setopt PROMPT_SUBST
+autoload -U colors && colors
+autoload -U compinit && compinit
+export PROMPT_EOL_MARK='%{$fg[red]%}·eol·%{$reset_color%}'
+
+# Zsh Prompt
+PROMPT=$'%{$fg[red]%}┌─$([[ \$? != 0 ]] && echo \"[✘]\")[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m%{$fg[red]%}]─[%{$fg[blue]%}%~%{$fg[red]%}]\n└─'
+PROMPT=$PROMPT$'%{$fg[yellow]%}$(__git_ps1 "< %s >")%{$fg[red]%}'
+PROMPT=$PROMPT$'─╼ %{$fg[yellow]%}%#%{$reset_color%} '
 
 # Alias
 alias ls='ls -G'
