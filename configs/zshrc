@@ -435,6 +435,7 @@ __git_ps1 ()
 setopt PROMPT_SUBST
 autoload -U colors && colors
 autoload -U compinit && compinit
+export PROMPT_EOL_MARK=PROMPT_EOL_MARK='%{$fg[red]%}«EOF»%{$reset_color%}'
 
 # Zsh Prompt
 PROMPT=$'%{$fg[red]%}┌─$([[ \$? != 0 ]] && echo \"[✘]\")[%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m%{$fg[red]%}]─[%{$fg[blue]%}%~%{$fg[red]%}]\n└─'
@@ -476,16 +477,16 @@ __zshrc_blank() {
 	done
 }
 
-#Start show background 
+# Start show background 
 echo -ne "\e[40;37m"
 __zshrc_blank $(tput cols)
 echo
 
-#Start show title
+# Start show title
 __zshrc_center_with_text "FBI Warning" "\e[41;37;1mFBI Warning\e[0m"
 echo -ne "\e[40;37m"
 
-#Start show content
+# Start show content
 __zshrc_center "Federal Law provides severe civil and criminal penalties for"
 __zshrc_center "the unauthorized reproduction,distribution ,or exhibition of"
 __zshrc_center "copyrighted motion pictures (Title 17, United states Code,"
