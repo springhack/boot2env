@@ -490,6 +490,7 @@ echo -e "\e[0m"
 setopt PROMPT_SUBST
 autoload -U colors && colors
 autoload -U compinit && compinit
+zstyle ':completion:*' rehash true
 export PROMPT_EOL_MARK='%{$fg[red]%}·eol·%{$reset_color%}'
 
 # Zsh Prompt
