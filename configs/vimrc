@@ -188,7 +188,7 @@ func! AddTitle()
   if fline[0:1] == "#!"
     return
   endif
-  let setA = ["h", "c", "cpp", "php", "js", "css", "java", "javascript", "typescript"]
+  let setA = ["h", "c", "cpp", "php", "js", "css", "java", "javascript", "typescript", "typescript.tsx"]
   let setB = ["htm", "html"]
   for i in range(1, len(setA))
     if &filetype == get(setA, i - 1)
