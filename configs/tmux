@@ -56,7 +56,7 @@ bind "'" select-pane -R
 # 调整Pane大小
 bind : resize-pane -L 5
 bind ? resize-pane -D 5
-bind { resize-pane -U 5
+bind \{ resize-pane -U 5
 bind '"' resize-pane -R 5
 
 
