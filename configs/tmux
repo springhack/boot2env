@@ -6,8 +6,8 @@
 
 # 更改前缀
 unbind C-b
-set -g prefix `
-bind ` send-prefix
+set -g prefix '`'
+bind '`' send-prefix
 
 
 # 重新加载配置文件
@@ -47,16 +47,16 @@ setw -g pane-base-index 1
 
 
 # 在Pane之间移动
-bind \; select-pane -L
-bind / select-pane -D
-bind [ select-pane -U
+bind ';' select-pane -L
+bind '/' select-pane -D
+bind '[' select-pane -U
 bind "'" select-pane -R
 
 
 # 调整Pane大小
-bind : resize-pane -L 5
-bind ? resize-pane -D 5
-bind \{ resize-pane -U 5
+bind ':' resize-pane -L 5
+bind '?' resize-pane -D 5
+bind '{' resize-pane -U 5
 bind '"' resize-pane -R 5
 
 
