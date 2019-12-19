@@ -33,7 +33,9 @@ hostname                username        password    port    AuthKeyFilePath
 
 > Need some dependencies, you can run this to get all (I think you use macOS):
 
-> For YouCompleteMe, just run `./install.py --clang-completer --system-libclang`
+> For YouCompleteMe, just run `./install.py --clang-completer` in terminal
+
+> For Coc, just run `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp` in vim
 
 ```
 # For powerline
@@ -54,13 +56,17 @@ npm install -g git+https://github.com/ramitos/jsctags.git
 brew install reattach-to-user-namespace
 # For tpm
 mkdir -p ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# For vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# For vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # For vim colorscheme
 mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/Erichain/vim-monokai-pro/master/colors/monokai_pro.vim -o ~/.vim/colors/monokai_pro.vim
 ```
 
 ### Updates:
+
+> Change vim plugin manager from `vundle` to `vim-plug`
+
+> Add Coc plugin, only use Ycm in c-family files
 
 > Add tmux plugins manager
 
@@ -77,3 +83,4 @@ mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/Erichain/vim-mo
 > Change babel-preset-latest to babel-preset-env
 
 > Add loading 
+:
