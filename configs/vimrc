@@ -96,7 +96,7 @@ let g:ycm_filetype_whitelist = {
       \ 'objc': 1,
       \ 'objcpp': 1
       \}
-" set completeopt-=preview
+set completeopt-=preview
 "" Local vimrc
 let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
@@ -133,7 +133,7 @@ filetype plugin indent on
 
 
 " AutoCMD Config
-autocmd BufNewFile,BufRead * exec ":call AddTitle()"
+autocmd BufNewFile,BufRead * exec ":call AutoRun()"
 
 
 " User Define Functions And Shortcuts
@@ -194,7 +194,8 @@ func! AddTitleHTML()
   call setline(5, "  Filename: ".expand("%"))
 endfunc
 
-func! CorrectFileType()
+func! CorrectFileTypeAction()
+  "" Make filetype right
   let ext = expand('%:e')
   let ext_types = {
         \ 'm': 'objc',
@@ -204,10 +205,19 @@ func! CorrectFileType()
   if _ft != ''
     let &filetype=_ft
   endif
+  "" Disable Coc on filetypes
+  for i in range(1, len(g:ycm_filetype_whitelist))
+    if &filetype == get(g:ycm_filetype_whitelist, i - 1)
+      let g:name = 1
+      silent! CocDisable
+    endif
+  endfor
 endfunc
 
-func! AddTitle()
-  call CorrectFileType()
+" AutoRun function
+func! AutoRun()
+  call CorrectFileTypeAction()
+  "" AddTitle stuff
   let fline = getline(1)
   if fline[0:1] == "#!"
     return
