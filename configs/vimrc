@@ -104,8 +104,6 @@ let g:localvimrc_sandbox = 0
 
 " Plugin Manager Here
 call plug#begin()
-  "" Bundle Manager
-  Plug 'VundleVim/Vundle.vim'
   "" Project stuff
   Plug 'embear/vim-localvimrc'
   Plug 'dbakker/vim-projectroot'
