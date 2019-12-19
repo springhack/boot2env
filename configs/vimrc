@@ -206,12 +206,10 @@ func! CorrectFileTypeAction()
     let &filetype=_ft
   endif
   "" Disable Coc on filetypes
-  for i in range(1, len(g:ycm_filetype_whitelist))
-    if &filetype == get(g:ycm_filetype_whitelist, i - 1)
-      let g:name = 1
-      silent! CocDisable
-    endif
-  endfor
+  let _ft_enable = get(g:ycm_filetype_whitelist, &filetype, '')
+  if _ft_enable != 0
+    silent! CocDisable
+  endif
 endfunc
 
 " AutoRun function
