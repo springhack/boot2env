@@ -22,10 +22,9 @@ colorscheme monokai_pro
 set t_Co=256
 let &t_8f = "\<esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<esc>[48;2;%lu;%lu;%lum"
-let g:minBufExplForceSyntaxEnable = 1
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+let g:airline_theme = 'angr'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 if ! has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
@@ -119,6 +118,7 @@ call plug#begin()
   Plug 'majutsushi/tagbar'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
+  Plug 'lambdalisue/gina.vim'
   Plug 'ycm-core/YouCompleteMe' " Just for c/cpp/objc
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'iamcco/markdown-preview.vim'
@@ -126,6 +126,8 @@ call plug#begin()
   "" Beauty stuff
   Plug 'gorodinskiy/vim-coloresque'
   Plug 'mtdl9/vim-log-highlighting'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 filetype plugin indent on
 
