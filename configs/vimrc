@@ -56,6 +56,7 @@ let NERDTreeChDirMode=2
 "" Markdown
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 "" ALE
+let g:ale_enabled = 0
 let g:ale_sign_error = '>E'
 let g:ale_sign_warning = '>W'
 let g:ale_echo_msg_error_str = 'E'
@@ -320,5 +321,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 "" Popup menu selection
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+func! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfun
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
+inoremap <silent><expr> <tab> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<tab>" : coc#refresh()

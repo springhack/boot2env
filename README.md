@@ -35,7 +35,7 @@ hostname                username        password    port    AuthKeyFilePath
 
 > For coc.nvim
 
-> 1. Install extensions `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp coc-clangd` in vim
+> 1. Install extensions `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp coc-clangd coc-eslint coc-tslint-plugin` in vim
 
 > 2. Config `:CocConfig`
 
