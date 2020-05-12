@@ -83,19 +83,6 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-"" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-let g:ycm_max_diagnostics_to_display = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_filetype_whitelist = {
-      \ 'h': 1,
-      \ 'c': 1,
-      \ 'cpp': 1,
-      \ 'objc': 1,
-      \ 'objcpp': 1
-      \}
-set completeopt-=preview
 "" Local vimrc
 let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
@@ -108,10 +95,12 @@ call plug#begin()
   Plug 'dbakker/vim-projectroot'
   "" Language stuff
   Plug 'moll/vim-node'
+  Plug 'kelan/gyp.vim'
   Plug 'keith/swift.vim'
   Plug 'othree/yajs.vim'
   Plug 'othree/html5.vim'
   Plug 'othree/es.next.syntax.vim'
+  Plug 'https://github.com/unofficial-mirror/gn', { 'rtp': 'misc/vim' }
   "" IDE stuff
   Plug 'w0rp/ale'
   Plug 'mileszs/ack.vim'
@@ -119,14 +108,13 @@ call plug#begin()
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'lambdalisue/gina.vim'
-  Plug 'ycm-core/YouCompleteMe' " Just for c/cpp/objc
-  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'iamcco/markdown-preview.vim'
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' } " For other filetypes
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   "" Beauty stuff
+  Plug 'vim-airline/vim-airline'
   Plug 'gorodinskiy/vim-coloresque'
   Plug 'mtdl9/vim-log-highlighting'
-  Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 filetype plugin indent on
@@ -204,11 +192,6 @@ func! CorrectFileTypeAction()
   let _ft = get(ext_types, ext, '')
   if _ft != ''
     let &filetype=_ft
-  endif
-  "" Disable Coc on filetypes
-  let _ft_enable = get(g:ycm_filetype_whitelist, &filetype, '')
-  if _ft_enable != 0
-    silent! CocDisable
   endif
 endfunc
 
@@ -336,3 +319,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+"" Popup menu selection
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"

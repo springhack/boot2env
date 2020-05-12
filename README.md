@@ -23,23 +23,34 @@ hostname                username        password    port    AuthKeyFilePath
 
 > this command try to connect via password default, place ```*``` to use AuthKeyFile
 
-### Command ```coder```: 
+### Command `coder`: 
 
 > A command to cerate project, react component or config files.
 
-> You can run ```coder -h``` to see help
+> You can run `coder -h` to see help
 
 ### Config files:
 
 > Need some dependencies, you can run this to get all (I think you use macOS):
 
-> For YouCompleteMe, just run `./install.py --clang-completer` in terminal
+> For coc.nvim
 
-> For Coc, just run `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp` in vim
+> 1. Install extensions `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp coc-clangd` in vim
+
+> 2. Config `:CocConfig`
+
+```json
+
+{
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "clangd.path": "/usr/local/opt/llvm/bin/clangd",
+  "javascript.suggestionActions.enabled": false
+}
+```
+
+### Components required:
 
 ```
-# For powerline
-pip3 install powerline-status
 # For python
 brew install python
 # For cmake
@@ -63,6 +74,8 @@ mkdir -p ~/.vim/colors && curl https://raw.githubusercontent.com/Erichain/vim-mo
 ```
 
 ### Updates:
+
+> Use coc.nvim, remove ycm, use airline instead of powerline
 
 > Change vim plugin manager from `vundle` to `vim-plug`
 
