@@ -326,6 +326,4 @@ func! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfun
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
-inoremap <silent><expr><up> pumvisible() ? "\<C-p>" : "\<up>"
 inoremap <silent><expr> <tab> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<tab>" : coc#refresh()
-inoremap <silent><expr> <down> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<down>" : coc#refresh()
