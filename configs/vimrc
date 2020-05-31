@@ -33,8 +33,8 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
-set laststatus=2 " Always display the statusline in all windows
 set guifont=Inconsolata\ for\ Powerline:h14
+set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline
 
 
@@ -311,6 +311,13 @@ vnoremap // y/<c-r>"<cr>
 "" Ack search
 vnoremap \\ y:Ack! <c-r>"<cr>
 
+" About windows
+"" Resize key bindings
+nmap <silent> \{ :resize -4<cr>
+nmap <silent> \? :resize +4<cr>
+nmap <silent> \: :vertical resize -4<cr>
+nmap <silent> \" :vertical resize +4<cr>
+
 " About Coc
 "" Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -325,5 +332,7 @@ func! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfun
+inoremap <silent><expr><up>    pumvisible() ? "\<C-p>" : "\<up>"
+inoremap <silent><expr><down>  pumvisible() ? "\<C-n>" : "\<down>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
-inoremap <silent><expr> <tab> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<tab>" : coc#refresh()
+inoremap <silent><expr><tab>   pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<tab>" : coc#refresh()
