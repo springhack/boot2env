@@ -53,8 +53,6 @@ let g:html5_event_handler_attributes_complete = 1
 "" NERDTree
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '^node_modules$[[dir]]']
 let NERDTreeChDirMode=2
-"" Markdown
-let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 "" ALE
 let g:ale_enabled = 0
 let g:ale_sign_error = '>E'
@@ -109,9 +107,9 @@ call plug#begin()
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'lambdalisue/gina.vim'
-  Plug 'iamcco/markdown-preview.vim'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   "" Beauty stuff
   Plug 'vim-airline/vim-airline'
   Plug 'gorodinskiy/vim-coloresque'
