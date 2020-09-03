@@ -85,6 +85,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 "" Local vimrc
 let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
+"" Clang-Format
+let g:clang_format#auto_format = 0
 
 
 " Plugin Manager Here
@@ -107,6 +109,7 @@ call plug#begin()
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'lambdalisue/gina.vim'
+  Plug 'rhysd/vim-clang-format'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -120,11 +123,12 @@ filetype plugin indent on
 
 
 " AutoCMD Config
-autocmd BufNewFile,BufRead * exec ":call AutoRun()"
+autocmd BufNewFile * exec ":call AutoRun(1)"
+autocmd BufRead * exec ":call AutoRun(0)"
 
 
 " User Define Functions And Shortcuts
-func! AddTitleClike()
+func! AddTitleClike(new_file)
   let f_line = getline(1)
   "" Detect shebang
   if f_line[0:2] == "#!"
@@ -141,7 +145,11 @@ func! AddTitleClike()
   "" Add tilte
   if getline(1) != comment_prefix && getline(2) != " *  Author: SpringHack - springhack@live.cn"
     if getline(1) != ""
-      call append(0, comment_prefix)
+      if a:new_file
+        call append(0, comment_prefix)
+      else
+        return
+      endif
     else
       call setline(1, comment_prefix)
     endif
@@ -155,7 +163,10 @@ func! AddTitleClike()
   call setline(4, " *  Filename: ".expand("%"))
 endfunc
 
-func! AddTitleHTML()
+func! AddTitleHTML(new_file)
+  if !a:new_file
+    return
+  endif
   if tolower(getline(1)) != "<!doctype html>"
     call append(0, "<!doctype html>")
   endif
@@ -171,7 +182,7 @@ func! AddTitleHTML()
     call append(7, "<html>")
     call append(8, "  <head>")
     call append(9, "    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>")
-    call append(10, "    <title>Index</title>")
+    call append(10, "    <title>SpringHack</title>")
     call append(11, "  </head>")
     call append(12, "  <body>")
     call append(13, "  </body>")
@@ -195,7 +206,7 @@ func! CorrectFileTypeAction()
 endfunc
 
 " AutoRun function
-func! AutoRun()
+func! AutoRun(new_file)
   call CorrectFileTypeAction()
   "" AddTitle stuff
   let fline = getline(1)
@@ -206,13 +217,17 @@ func! AutoRun()
   let setB = ["htm", "html"]
   for i in range(1, len(setA))
     if &filetype == get(setA, i - 1)
-      call AddTitleClike()
+      call AddTitleClike(a:new_file)
     endif
   endfor
   for i in range(1, len(setB))
     if &filetype == get(setB, i - 1)
-      call AddTitleHTML()
+      call AddTitleHTML(a:new_file)
     endif
+  endfor
+  "" clang-format
+  for i in range(1, 5)
+    map <buffer>= :ClangFormat<cr>
   endfor
 endfunc
 
@@ -271,6 +286,7 @@ func! BuildAll()
     call RunSourceFile()
   endif
 endfunc
+
 
 " Command define
 "" Auto insert header
