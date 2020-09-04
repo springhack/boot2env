@@ -227,7 +227,9 @@ func! AutoRun(new_file)
   endfor
   "" clang-format
   for i in range(1, 5)
-    map <buffer>= :ClangFormat<cr>
+    if &filetype == get(setA, i - 1)
+      map <buffer>= :ClangFormat<cr>
+    endif
   endfor
 endfunc
 
