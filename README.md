@@ -60,7 +60,7 @@ brew install ctags
 # For tmux
 brew install tmux
 # For ack.vim
-brew install the_silver_searcher
+brew install ripgrep
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
 # For reattach-to-user-namespace

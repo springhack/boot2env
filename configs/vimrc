@@ -40,11 +40,9 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 
 " Plugin Config Here
 "" Ack
-let g:ack_ignore = ['node_modules', 'dist']
-let g:ackprg = 'ag --nogroup --nocolor --column'
-if len(g:ack_ignore) != 0
-  let g:ackprg = g:ackprg . ' --ignore ' . join(g:ack_ignore, ' --ignore ')
-endif
+let g:ackprg = 'rg --vimgrep --ignore-dot '
+let g:ack_ignore = ['node_modules', 'build', 'dist', 'out']
+let g:ackprg = g:ackprg . '-g !' . join(g:ack_ignore, ' -g !')
 "" othree/html5.vim
 let g:html5_rdfa_attributes_complete = 1
 let g:html5_aria_attributes_complete = 1
@@ -80,8 +78,16 @@ let g:ale_fixers = {
 "" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_max_depth = 40
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_working_path_mode = 'w'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 "" Local vimrc
 let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0

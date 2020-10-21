@@ -1,6 +1,6 @@
 {
   "name": "boot2env",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "A toolkit to help dev.",
   "main": "index.js",
   "scripts": {
