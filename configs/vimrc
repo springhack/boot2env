@@ -78,11 +78,15 @@ let g:ale_fixers = {
 "" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_max_depth = 40
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 99
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_working_path_mode = 'w'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.DS_Store     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.DS_Store  " Windows
+if has('mac')
+  let g:ctrlp_user_command = 'mdfind -onlyin %s file'
+endif
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll)$',
