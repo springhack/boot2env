@@ -18,7 +18,6 @@ filetype off
 " Vim UI Config
 "" These lines setup the environment to show graphics and colors correctly.
 """ set Vim-specific sequences for RGB colors
-colorscheme monokai_pro
 set t_Co=256
 let &t_8f = "\<esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<esc>[48;2;%lu;%lu;%lum"
@@ -97,6 +96,10 @@ let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
 "" Clang-Format
 let g:clang_format#auto_format = 0
+"" Vim Cpp Modern
+let g:cpp_attributes_highlight = 1
+let g:cpp_member_highlight = 1
+let g:cpp_simple_highlight = 1
 
 
 " Plugin Manager Here
@@ -124,11 +127,15 @@ call plug#begin()
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   "" Beauty stuff
+  Plug 'rakr/vim-one'
+  Plug 'bfrg/vim-cpp-modern'
+  Plug 'fratajczak/one-monokai-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'gorodinskiy/vim-coloresque'
   Plug 'mtdl9/vim-log-highlighting'
   Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+colorscheme monokai_pro
 filetype plugin indent on
 
 
@@ -299,6 +306,11 @@ func! BuildAll()
   endif
 endfunc
 
+func! SwitchColorScheme()
+  colorscheme one
+  set background=light
+endfun
+
 
 " Command define
 "" Auto insert header
@@ -307,6 +319,8 @@ command S call CompileCode()
 command D call RunResultBinary()
 "" Get into current dir of file
 command CWD lcd %:p:h
+"" Switch theme
+command LightUp call SwitchColorScheme()
 "" Git command
 command! -nargs=* Glog execute 'silent !tig log <args> ' . expand('%') | redraw!
 command! -nargs=* Gblame execute 'silent !tig blame <args> ' . expand('%') | redraw!
