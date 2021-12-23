@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-let fs = require('fs');
 let path = require('path');
 let tool = require('commander');
 let child_process = require('child_process');

@@ -1,24 +1,12 @@
-#!/usr/bin/env python
+#!/bin/bash
 
-import random
-import socket
-import thread
-import time
-import sys
-import os
-import re
+show_log() {
+  eol=${4:-"\n"}
+  echo -n -e "$1\033[0;35m[$2]\033[0m $3$eol" 1>&2
+}
 
-
-HOST = '127.0.0.1'
-USER = 'springhack'
-PORT = 10022
-SSH_CONFIG = '~/.ssh/auto_login'
-
-BUFFSIZE = 1024
-ADDR = (HOST, PORT)
-
-
-LOGO = '''
+show_logo() {
+  cat << EOF
 [0m[1;30m         #####[0m
 [0m[1;30m        #######
 [0m[1;30m        ##[0m[1;37mO[0m[1;30m#[0m[1;37mO[0m[1;30m##            Powered by SpringHack
@@ -31,175 +19,95 @@ LOGO = '''
 [0m[1;33m ######[0m[1;30m#[0m[1;37m#######[0m[1;30m#[0m[1;33m######      [0m
 [0m[1;33m #######[0m[1;30m#[0m[1;37m#####[0m[1;30m#[0m[1;33m#######      [0m
 [0m[1;33m   #####[0m[1;30m#######[0m[1;33m#####        [0m
-'''
+EOF
+}
 
-def Logo():
-    print LOGO
+get_host_info() {
+  case $1 in
+    host)
+      awk '{print $1}' | xargs
+      ;;
+    user)
+      awk '{print $2}' | xargs
+      ;;
+    pass)
+      awk '{print $3}' | xargs
+      ;;
+    port)
+      awk '{print $4}' | xargs
+      ;;
+    file)
+      awk '{print $5}' | xargs
+      ;;
+    *)
+      echo '*'
+      ;;
+  esac
+}
 
+read_choice() {
+  show_log '' '<=>'  'Which host:' ' '
+  read index
+  echo $index
+}
 
-class ProgressBar:
-    def __init__(self, count = 0, total = 0, width = 50):
-        self.count = count
-        self.total = total
-        self.width = width
-    def move(self):
-        self.count += 1
-    def log(self, s):
-        sys.stdout.write(' ' * (self.width + 9) + '\r')
-        sys.stdout.flush()
-        print s
-        progress = self.width * self.count / self.total
-        sys.stdout.write('{0:3}/{1:3}: '.format(self.count, self.total))
-        sys.stdout.write('#' * progress + '-' * (self.width - progress) + '\r')
-        if progress == self.width:
-            sys.stdout.write('\n')
-        sys.stdout.flush()
+show_host_select() {
+  count=0
+  hosts=()
+  while IFS= read line; do
+    count=$(expr $count + 1);
+    host=$(get_host_info host <<< $line)
+    user=$(get_host_info user <<< $line)
+    hosts[$count]="$line"
+    show_log '  ' $count $user@$host
+  done < ~/.ssh/auto_login
+  choice=$(read_choice)
+  if [ 0 -lt "$choice" ] 2>/dev/null && [ "$choice" -le "$count" ];
+  then
+    echo "${hosts[$choice]}"
+  else
+    echo '*'
+  fi
+}
 
-
-
-def showBar(count, timeout, cb):
-    bar = ProgressBar(total = count)
-    for i in range(count):
-        bar.log('Trying ...')
-        ret = cb(bar)
-        if ret:
-            return True
-        bar.move()
-        bar.log('Tried to connect vm %d time(s) ...' % (i + 1))
-        time.sleep(timeout)
-    return False
-
-
-
-def getList():
-    list = os.popen(r"VBoxManage list vms | awk -F \" '{print $2}'").read().split('\n')
-    while '' in list:
-        list.remove('')
-    return list
-
-
-def startVM(vm):
-    print 'Starting vm ...'
-    os.system('VBoxHeadless -startvm "%s" >/dev/null 2>&1 &' % vm)
-    time.sleep(3)
-    print 'Started !'
-
-
-def killConn(conn):
-    time.sleep(2)
-    conn.close()
-
-
-def SSHCheck(bar):
-    try:
-        conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        conn.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
-        conn.connect(ADDR)
-        conn.setblocking(0)
-        conn.send('WTF Test')
-        bar.log('Sending test data ...')
-        time.sleep(2)
-        bar.log('Trying to get banner ...')
-        rec = conn.recv(BUFFSIZE)
-        if rec.find('OpenSSH'):
-            return True
-        else:
-            return False
-    except Exception,e:
-        return False
-
-
-def opt_vm():
-    print 'List all environment: '
-    list = getList()
-    for i in range(len(list)):
-        print '\t%d. %s' % (i + 1, list[i])
-    ch = int(input('Choice a env: '))
-    if ch > len(list):
-        print 'No such env, exit !'
-        return
-    vm = list[ch - 1]
-    startVM(vm)
-    ret = showBar(20, 3, SSHCheck)
-    if ret:
-        print '\n\nOK, link start !\n'
-        StartTime = 0
-        EndTime = 0
-        while EndTime - StartTime <= 1:
-            if StartTime != 0 and EndTime != 0:
-                time.sleep(2)
-                print '\n\nReconnect to SSH\n\n'
-            StartTime = time.time()
-            os.system('ssh %s@%s -p %d' % (USER, HOST, PORT))
-            EndTime = time.time()
-        print 'Exiting ...'
-        os.system('VBoxManage controlvm "%s" poweroff' % vm)
-        print 'We done !'
-    else:
-        print 'Unknown error, try again ?'
-        os.system('VBoxManage controlvm "%s" poweroff' % vm)
-        print 'Exited !'
-
-
-def opt_ssh():
-    ssh = []
-    exp = re.compile(r'[\s]+')
-    if not os.path.exists((os.path.expanduser(SSH_CONFIG))):
-        print 'No config file found !'
-        sys.exit(-1)
-    with open(os.path.expanduser(SSH_CONFIG)) as f:
-        for line in f:
-            ssh.append(filter(lambda x:x!='', exp.split(line)))
-    print 'List all remote host: '
-    list = getList()
-    for i in range(len(ssh)):
-        print '\t%d. %s@%s' % (i + 1, ssh[i][1], ssh[i][0])
-    ch = int(input('Choice a host: '))
-    if ch > len(ssh):
-        print 'No such host, exit !'
-        return
-    host = ssh[ch - 1]
-    tmp = '/tmp/auto_login.%f' % random.random()
-    if host[3] == '*':
-        host[3] = '22'
-    with open(tmp, 'w') as f:
-        f.write('#!/usr/bin/expect\n')
-        if host[4] == '*':
-            f.write('spawn ssh %s@%s -p %s\n' % (host[1], host[0], host[3]))
-        else:
-            f.write('spawn ssh %s@%s -p %s -i %s\n' % (host[1], host[0], host[3], host[4]))
-        f.write(
-                r'''
+do_connect_host() {
+  host=$(get_host_info host <<< $1)
+  user=$(get_host_info user <<< $1)
+  pass=$(get_host_info pass <<< $1)
+  port=$(get_host_info port <<< $1)
+  file=$(get_host_info file <<< $1)
+  if [ "$port" = '*' ];
+  then
+    port=22
+  fi
+  if [ "$file" = '*' ];
+  then
+    ssh_file=$(mktemp)
+    cat > $ssh_file << EOF
+#!/usr/bin/expect
+spawn ssh -oStrictHostKeyChecking=no $user@$host -p $port
 set timeout 10
 expect {
-    "yes/no" { send "yes\r"; }
-    "assword" { send "%s\r" }
+  "assword" { send "${pass}\r" }
 }
 interact
-''' % host[2]
-)
-    os.chmod(tmp, 0o755)
-    os.system(tmp)
-    os.remove(tmp)
+EOF
+    chmod 755 $ssh_file
+    $ssh_file
+    rm $ssh_file
+  else
+    ssh -oStrictHostKeyChecking=no $user@$host -p $port -i $file
+  fi
+}
 
+main() {
+  show_log '' '*' 'Welcome use ssh auto login tool'
+  show_logo
+  show_log '' '<=>' 'Choose which host to connect ...'
+  host="$(show_host_select)"
+  show_log '' '<=>' 'Connecting to host ...'
+  do_connect_host "$host"
+  show_log '' '*' 'Bye!'
+}
 
-def main():
-    Logo()
-    print 'Boot option: '
-    print '\t1. Boot a local VM.'
-    print '\t2. Connect to a remote host.'
-    ch = int(input('Choose one: '))
-    if ch > 2:
-        print 'No such choice !'
-        sys.exit(-1)
-    if ch == 1:
-        opt_vm()
-    else:
-        opt_ssh()
-
-
-if __name__ == '__main__':
-    try:
-        main()
-    except:
-        print 'Something wrong !' 
+main $@
