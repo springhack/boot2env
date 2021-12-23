@@ -105,7 +105,13 @@ main() {
   show_logo
   show_log '' '<=>' 'Choose which host to connect ...'
   host="$(show_host_select)"
-  show_log '' '<=>' 'Connecting to host ...'
+  if [ "$host" = '*' ];
+  then
+    show_log '' '*' 'Emmm, bye!'
+    exit 0
+  else
+    show_log '' '<=>' 'Connecting to host ...'
+  fi
   do_connect_host "$host"
   show_log '' '*' 'Bye!'
 }
