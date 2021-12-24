@@ -52,6 +52,7 @@ read_choice() {
 }
 
 show_host_select() {
+  show_log '' '<=>' 'Choose which host to connect ...'
   count=0
   hosts=()
   while IFS= read line; do
@@ -71,6 +72,7 @@ show_host_select() {
 }
 
 do_connect_host() {
+  show_log '' '<=>' 'Connecting to host ...'
   host=$(get_host_info host <<< $1)
   user=$(get_host_info user <<< $1)
   pass=$(get_host_info pass <<< $1)
@@ -80,8 +82,9 @@ do_connect_host() {
   then
     port=22
   fi
-  if [ "$file" = '*' ];
+  if [ "$pass" != '*' ];
   then
+    show_log '' '===' 'Connecting host using password ...'
     ssh_file=$(mktemp)
     cat > $ssh_file << EOF
 #!/usr/bin/expect
@@ -95,22 +98,26 @@ EOF
     chmod 755 $ssh_file
     $ssh_file
     rm $ssh_file
-  else
-    ssh -oStrictHostKeyChecking=no $user@$host -p $port -i $file
+    return
   fi
+  if [ "$file" != '*' ];
+  then
+    show_log '' '===' 'Connecting host using key file ...'
+    ssh -oStrictHostKeyChecking=no $user@$host -p $port -i $file
+    return
+  fi
+  show_log '' '===' 'Connecting host just without anything ...'
+  ssh -oStrictHostKeyChecking=no $user@$host -p $port
 }
 
 main() {
   show_log '' '*' 'Welcome use ssh auto login tool'
   show_logo
-  show_log '' '<=>' 'Choose which host to connect ...'
   host="$(show_host_select)"
   if [ "$host" = '*' ];
   then
     show_log '' '*' 'Emmm, bye!'
     exit 0
-  else
-    show_log '' '<=>' 'Connecting to host ...'
   fi
   do_connect_host "$host"
   show_log '' '*' 'Bye!'
