@@ -85,6 +85,12 @@ do_connect_host() {
   if [ "$pass" != '*' ];
   then
     show_log '' '===' 'Connecting host using password ...'
+    line='@!#$%^&*()_+"'
+    pass="$(perl -ne 'print quotemeta($_)' <<< "$pass")"
+    if [ "${pass: -1}" = "\\" ];
+    then
+      pass="${pass%?}"
+    fi
     ssh_file=$(mktemp)
     cat > $ssh_file << EOF
 #!/usr/bin/expect
