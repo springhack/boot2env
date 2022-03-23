@@ -39,6 +39,9 @@ get_host_info() {
     file)
       awk '{print $5}' | xargs
       ;;
+    opts)
+      awk '{$1="";$2="";$3="";$4="";$5="";print $0}'
+      ;;
     *)
       echo '*'
       ;;
@@ -56,11 +59,14 @@ show_host_select() {
   count=0
   hosts=()
   while IFS= read line; do
-    count=$(expr $count + 1);
-    host=$(get_host_info host <<< $line)
-    user=$(get_host_info user <<< $line)
-    hosts[$count]="$line"
-    show_log '  ' $count $user@$host
+    if [ "${line:0:1}" != "#" ] && [ "$line" != "" ];
+    then
+      count=$(expr $count + 1);
+      host=$(get_host_info host <<< $line)
+      user=$(get_host_info user <<< $line)
+      hosts[$count]="$line"
+      show_log '  ' $count $user@$host
+    fi
   done < ~/.ssh/auto_login
   choice=$(read_choice)
   if [ 0 -lt "$choice" ] 2>/dev/null && [ "$choice" -le "$count" ];
@@ -78,6 +84,14 @@ do_connect_host() {
   pass=$(get_host_info pass <<< $1)
   port=$(get_host_info port <<< $1)
   file=$(get_host_info file <<< $1)
+  opts=$(get_host_info opts <<< $1 | awk '{$1=$1;print}')
+  opts="${opts//\"/\\\"}"
+  if [ "$opts" = "" ];
+  then
+    opts="-oStrictHostKeyChecking=no"
+  else
+    opts="-oStrictHostKeyChecking=no $opts"
+  fi
   if [ "$port" = '*' ];
   then
     port=22
@@ -94,7 +108,7 @@ do_connect_host() {
     ssh_file=$(mktemp)
     cat > $ssh_file << EOF
 #!/usr/bin/expect
-spawn ssh -oStrictHostKeyChecking=no $user@$host -p $port
+spawn bash -c "ssh $opts $user@$host -p $port"
 set timeout 10
 expect {
   "assword" { send "${pass}\r" }
@@ -109,11 +123,11 @@ EOF
   if [ "$file" != '*' ];
   then
     show_log '' '===' 'Connecting host using key file ...'
-    ssh -oStrictHostKeyChecking=no $user@$host -p $port -i $file
+    ssh $opts $user@$host -p $port -i $file
     return
   fi
   show_log '' '===' 'Connecting host just without anything ...'
-  ssh -oStrictHostKeyChecking=no $user@$host -p $port
+  ssh $opts $user@$host -p $port
 }
 
 main() {
