@@ -123,7 +123,6 @@ call plug#begin()
   Plug 'majutsushi/tagbar'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree'
-  Plug 'lambdalisue/gina.vim'
   Plug 'rhysd/vim-clang-format'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -372,7 +371,7 @@ func! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfun
-inoremap <silent><expr><up>    pumvisible() ? "\<C-p>" : "\<up>"
-inoremap <silent><expr><down>  pumvisible() ? "\<C-n>" : "\<down>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
-inoremap <silent><expr><tab>   pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<tab>" : coc#refresh()
+inoremap <silent><expr><down>  coc#pum#visible() ? coc#pum#next(1) : "\<down>"
+inoremap <silent><expr><up>    coc#pum#visible() ? coc#pum#prev(1) : "\<up>"
+inoremap <silent><expr><tab>   coc#pum#visible() ? coc#pum#next(1) : <SID>check_back_space() ? "\<tab>" : coc#refresh()
+inoremap <silent><expr><s-tab> coc#pum#visible() ? coc#pum#prev(1) : "\<s-tab>"
