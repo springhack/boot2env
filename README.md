@@ -35,22 +35,28 @@ hostname                username        password    port    AuthKeyFilePath
 
 > For coc.nvim
 
-> 1. Install extensions `:CocInstall coc-css coc-json coc-html coc-tsserver coc-python coc-phpls coc-rls coc-java coc-vimlsp coc-clangd coc-eslint coc-tslint-plugin` in vim
+> 1. Install extensions `:CocInstall coc-vimlsp coc-css coc-json coc-html coc-clangd coc-tsserver coc-pyright coc-rust-analyzer coc-clangd coc-phpls coc-java coc-tslint-plugin` in vim
 
 > 2. Config `:CocConfig`
 
 ```json
-
 {
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
-  "clangd.path": "/usr/local/opt/llvm/bin/clangd",
-  "javascript.suggestionActions.enabled": false
+  "clangd.path": "/opt/homebrew/opt/llvm/bin/clangd",
+  "clangd.arguments": ["--background-index=false"],
+  "javascript.suggestionActions.enabled": false,
+  "suggest.fixInsertedWord": false,
+  "suggest.noselect": true
 }
 ```
 
 ### Components required:
 
 ```
+# For reattach-to-user-namespace
+brew install reattach-to-user-namespace
+# For ack.vim
+brew install ripgrep
 # For python
 brew install python
 # For cmake
@@ -59,12 +65,8 @@ brew install cmake
 brew install ctags
 # For tmux
 brew install tmux
-# For ack.vim
-brew install ripgrep
 # For jsctags
 npm install -g git+https://github.com/ramitos/jsctags.git
-# For reattach-to-user-namespace
-brew install reattach-to-user-namespace
 # For tpm
 mkdir -p ~/.tmux && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # For vim-plug
