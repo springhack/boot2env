@@ -506,9 +506,7 @@ alias l='ls -CFG'
 alias tt=tmux
 
 # Env
-eval REAL_HOME=~
 export LANG=en_US.UTF-8
 export NODE_PATH=./node_modules/.bin
-export BREW_PATH=/usr/local/bin:/usr/local/sbin
-export ANDROID_PATH=$REAL_HOME/Library/Android/sdk/platform-tools:$REAL_HOME/Library/Android/ndk
-export PATH=$NODE_PATH:$BREW_PATH:$ANDROID_PATH:$PATH
+export BREW_PATH=$(brew --prefix)/bin
+export PATH=$NODE_PATH:$BREW_PATH:$PATH
