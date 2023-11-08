@@ -507,6 +507,6 @@ alias tt=tmux
 
 # Env
 export LANG=en_US.UTF-8
+export BREW_PATH=$(brew --prefix)
 export NODE_PATH=./node_modules/.bin
-export BREW_PATH=$(brew --prefix)/bin
-export PATH=$NODE_PATH:$BREW_PATH:$PATH
+export PATH=$NODE_PATH:$BREW_PATH/bin:$BREW_PATH/sbin:$PATH
