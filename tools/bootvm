@@ -88,9 +88,9 @@ do_connect_host() {
   opts="${opts//\"/\\\"}"
   if [ "$opts" = "" ];
   then
-    opts="-oStrictHostKeyChecking=no"
+    opts="-oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
   else
-    opts="-oStrictHostKeyChecking=no $opts"
+    opts="-oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $opts"
   fi
   if [ "$port" = '*' ];
   then
