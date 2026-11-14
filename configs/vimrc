@@ -15,6 +15,12 @@ syntax on
 filetype off
 
 
+" Vim Mouse Config
+set mouse=a
+nnoremap <ScrollWheelUp> 3k
+nnoremap <ScrollWheelDown> 3j
+
+
 " Vim UI Config
 "" These lines setup the environment to show graphics and colors correctly.
 """ set Vim-specific sequences for RGB colors
